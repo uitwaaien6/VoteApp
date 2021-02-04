@@ -21,25 +21,24 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        
     }
 
     render() {
         return (
-            <React.StrictMode>
-                <Provider store={store}>
-                    <Router>
-                        <div className="app__container">
-                            <div className="app__content">
-                                <Header />
-                                <Switch>
-                                    <Route path="/" exact component={Home} />
-                                    <Route path="/votes" exact component={Votes} />
-                                </Switch>
-                            </div>  
-                        </div>
-                    </Router>
-                </Provider>
-            </React.StrictMode>
+            <Provider store={store}>
+                <Router>
+                    <div className="app__container">
+                        <div className="app__content">
+                            <Header />
+                            <Switch>
+                                <Route path="/" exact component={Home} />
+                                <Route path="/votes" exact component={Votes} />
+                            </Switch>
+                        </div>  
+                    </div>
+                </Router>
+            </Provider>
         );
     };
     
