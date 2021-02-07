@@ -1,0 +1,26 @@
+.header__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.header__items > li {
+    padding: 1.5rem;
+    font-size: 4rem;
+    color: rgb(180, 92, 33);
+}
+
+

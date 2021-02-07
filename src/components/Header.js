@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 // ACTION CREATERS
 import signInAction from '../actions/actions';
 
+// CSS
+import '../styles/components/Header.css';
+
 class Header extends React.Component {
 
     constructor(props) {
@@ -13,16 +16,29 @@ class Header extends React.Component {
         this.state = {}
     }
 
+    renderHeaderElements(items) {
+        return (
+            <ul className="header__items">
+                {
+                    items.map((item, index) => {
+                        return (
+                            <li key={index}>{item}</li>
+                        );
+                    })
+                }
+            </ul>
+        )
+    }
+
     componentDidMount() {
-        this.props.signIn();
+
     }
 
     render() {
-        console.log(this.props.user);
         return (
             <div className="header__container">
                 <div className="header__content">
-                    Header
+                    {this.renderHeaderElements(["Votify"])}
                 </div>
             </div>
         );
