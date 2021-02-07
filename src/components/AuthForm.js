@@ -2,6 +2,10 @@
 // NODE MODULES
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+// ACTIONS
+import actions from '../actions/actions';
 
 // CSS
 import '../styles/components/AuthForm.css';
@@ -103,10 +107,15 @@ class AuthForm extends React.Component {
             <>
                 <div>
                     <Link>
-                        <button>
+                        <button
+                            onClick={() => {
+                                this.props.logIn({ email: this.state.email, password: this.state.password });
+                            }}
+                        >
                             {isLogin ? 'Log In' : 'Register'}
                         </button>
                     </Link>
+                    
                 </div>
 
                 {this.renderForgetPassword(isLogin)}
@@ -191,4 +200,18 @@ class AuthForm extends React.Component {
     };
 }
 
-export default AuthForm;
+function mapStateToProps(state) {
+    return {
+        user: state.auth.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        logIn: ({ email, password }) => {
+            dispatch(actions.logInAction({ uuid: 1, role: 'admin' }));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);

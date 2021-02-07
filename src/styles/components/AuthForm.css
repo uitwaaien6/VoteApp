@@ -41,7 +41,12 @@
     cursor: pointer;
     border: none;
     background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
 }
+
+.auth-form__form > div button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}   
 
 ::placeholder {
     color: rgba(255, 255, 255, 0.6);

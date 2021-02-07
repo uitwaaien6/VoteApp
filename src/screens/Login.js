@@ -1,11 +1,13 @@
 
 // NODE MODULES
 import React from 'react';
-import { connect } from 'react-redux';
 
 // COMPONENTS 
 import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
+
+// ACTIONS
+//import actions from '../actions/actions';
 
 class Login extends React.Component {
 
@@ -19,6 +21,7 @@ class Login extends React.Component {
     }
 
     render() {
+
         return (
             <div className="login__container">
                 <div className="login__content">
@@ -29,5 +32,7 @@ class Login extends React.Component {
         );
     };
 }
+
+
 
 export default Login;

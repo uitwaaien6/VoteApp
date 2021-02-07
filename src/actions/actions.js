@@ -2,10 +2,16 @@
 // ACTION TYPES
 import types from './types';
 
-export default function signInAction(payload) {
+function logInAction(payload) {
     return {
         type: types.SIGN_IN,
         payload
     }
 }
+
+const actions = {
+    logInAction
+}
+
+export default actions;
 

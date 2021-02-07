@@ -61,26 +61,24 @@ class Footer extends React.Component {
             <div className="footer__social">
                 <ul>
                     <li>
-                        <a href="https://www.facebook.com/uitwaaien6" target="_blank"><FaFacebookSquare /></a>
+                        <a href="https://www.facebook.com/uitwaaien6" target="_blank" rel="noreferrer"><FaFacebookSquare /></a>
                     </li>
                     <li>
-                        <a href="https://www.twitter.com/uitwaaien_6" target="_blank"><FaTwitterSquare /></a>
+                        <a href="https://www.twitter.com/uitwaaien_6" target="_blank" rel="noreferrer"><FaTwitterSquare /></a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com/ruzgar.ata" target="_blank"><FaInstagramSquare /></a>
+                        <a href="https://www.instagram.com/ruzgar.ata" target="_blank" rel="noreferrer"><FaInstagramSquare /></a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/ruzgar-ata-ozkan" target="_blank"><FaLinkedin /></a>
+                        <a href="https://www.linkedin.com/in/ruzgar-ata-ozkan" target="_blank" rel="noreferrer"><FaLinkedin /></a>
                     </li>
                     <li>
-                        <a href="https://www.youtube.com/channel/UC929IQUbYGJnpnMBlP_sepQ" target="_blank"><FaYoutubeSquare /></a>
+                        <a href="https://www.youtube.com/channel/UC929IQUbYGJnpnMBlP_sepQ" target="_blank" rel="noreferrer"><FaYoutubeSquare /></a>
                     </li>
                     <li>
-                        <a href="https://discord.gg/Vzs6cFBs79" target="_blank"><FaDiscord /></a>
+                        <a href="https://discord.gg/Vzs6cFBs79" target="_blank" rel="noreferrer"><FaDiscord /></a>
                     </li>
                 </ul>
-
-                <p>© All Rights Reserved.</p>
             </div>
         );
     };
@@ -96,6 +94,9 @@ class Footer extends React.Component {
                     {this.renderList()}
                     <hr />
                     {this.renderSocial()}
+
+                    
+                    <p>© All Rights Reserved.</p>
                 </div>
             </div>
         );

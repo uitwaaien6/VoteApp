@@ -10,7 +10,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 
 // COMPONENTS
-import Header from './Header';
+//import Header from './Header';
 import Footer from './Footer';
 
 // STORE
