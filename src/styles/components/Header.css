@@ -29,19 +29,27 @@
 }
 
 .header__content > div > ul > li {
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 0rem;
     font-size: 1.5rem;
     border: 1px solid rgb(180, 92, 33);
     border-radius: 0.5rem;
-    color: rgb(180, 92, 33);
     transition: all 0.2s ease-in-out;
     margin: 0rem 0.6rem;
 } 
 
 .header__content > div > ul > li:hover {
-    color: white;
     cursor: pointer;
     background-color: rgb(180, 92, 33);
+}
+
+.header__content > div > ul > li > a {
+    padding: 0.5rem 1.2rem;
+    color: rgb(180, 92, 33);
+    text-decoration: none;
+}
+
+.header__content > div > ul > li > a:hover {
+    color: white;
 }
 
 .header__hamburger {

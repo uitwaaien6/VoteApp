@@ -19,9 +19,7 @@ class Home extends React.Component {
         return (
             <div className="home__container">
                 <div className="home__content">
-                    Home Screen
                     
-                    <Link to="/votes">Go to Votes</Link>
                 </div>
             </div>
         );

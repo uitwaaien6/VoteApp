@@ -18,9 +18,7 @@ class Votes extends React.Component {
         return (
             <div className="votes__container">
                 <div className="votes__content">
-                    Votes Screen
-
-                    <Link to="/">Go to Home</Link>
+                    
                 </div>
             </div>
         );

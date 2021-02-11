@@ -2,6 +2,9 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+// REACT ICONS
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 // ACTION CREATERS
@@ -36,7 +39,13 @@ class Header extends React.Component {
         if (isLoggedIn) {
             return (
                 <ul>
-                    <li>Profile</li>
+                    <li>
+                        <Link
+                            to="/profile"
+                        >
+                            Profile
+                        </Link>
+                    </li>
                     <li
                         onClick={this.onLogOut}
                     >
@@ -46,7 +55,17 @@ class Header extends React.Component {
             );
         }
 
-        return null;
+        return (
+            <ul>
+                <li>
+                    <Link
+                        to="/login"
+                    >
+                        Log in
+                    </Link>
+                </li>
+            </ul>
+        );
     }
 
     renderHeaderElements(isLoggedIn) {
@@ -68,7 +87,7 @@ class Header extends React.Component {
     }
 
     renderHamburgerMenu(isHamburgerMenu, isLoggedIn) {
-        if (isHamburgerMenu && isLoggedIn) {
+        if (isHamburgerMenu) {
             return (
                 <div
                     ref={this.hamburgerMenu}
@@ -83,6 +102,7 @@ class Header extends React.Component {
     }
 
     handleResize() {
+        console.log(window.innerWidth);
         if (this.hamburgerMenu.current && window.innerWidth > 900) {
             this.setState({ ...this.state, isHamburgerMenu: false });
         }
@@ -97,7 +117,7 @@ class Header extends React.Component {
     }
 
     componentWillUnmount() {
-
+        window.removeEventListener('resize', this.handleResize);
     }
 
     render() {

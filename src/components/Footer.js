@@ -29,7 +29,9 @@ class Footer extends React.Component {
                         items.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <Link>
+                                    <Link
+                                        to={`/${item.replace(' ', '-').toLowerCase()}`}
+                                    >
                                         {item}
                                     </Link>
                                 </li>
@@ -48,11 +50,15 @@ class Footer extends React.Component {
             <div className="footer__list">
 
                 <div id="footer__logo">
-                    VOTIFY
+                    <Link
+                        to="/"
+                    >
+                        VOTIFY
+                    </Link>
                 </div>
 
-                {this.renderItems(['CONTACT US', 'ABOUT US', 'RESOURCES', 'SERVICES'])}
-                {this.renderItems(['SOFTWARE', 'BUSSINNESS'])}
+                {this.renderItems(['CONTACT US', 'ABOUT US', 'RESOURCES'])}
+                {this.renderItems(['SOFTWARE', 'BUSINESSES', 'SERVICES'])}
             </div>
         );
     };
@@ -95,12 +101,13 @@ class Footer extends React.Component {
         return (
             <div className="footer__container">
                 <div className="footer__content">
+
                     {this.renderList()}
                     <hr />
                     {this.renderSocial()}
 
-                    
                     <p>© All Rights Reserved.</p>
+                    
                 </div>
             </div>
         );
