@@ -21,7 +21,10 @@ class Header extends React.Component {
             isHamburgerMenu: false
         }
 
+        this.hamburgerMenu = React.createRef();
+
         this.onLogOut = this.onLogOut.bind(this);
+        this.handleResize = this.handleResize.bind(this);
     }
 
     async onLogOut() {
@@ -67,7 +70,10 @@ class Header extends React.Component {
     renderHamburgerMenu(isHamburgerMenu, isLoggedIn) {
         if (isHamburgerMenu && isLoggedIn) {
             return (
-                <div className="header__hamburger">
+                <div
+                    ref={this.hamburgerMenu}
+                    className="header__hamburger"
+                >
                     {this.renderAuthElements(this.props.isLoggedIn)}
                 </div>
             );
@@ -76,7 +82,21 @@ class Header extends React.Component {
         return null;
     }
 
+    handleResize() {
+        if (this.hamburgerMenu.current && window.innerWidth > 900) {
+            this.setState({ ...this.state, isHamburgerMenu: false });
+        }
+    }
+
     componentDidMount() {
+
+        window.addEventListener('load', () => {
+            window.addEventListener('resize', this.handleResize);
+        });
+
+    }
+
+    componentWillUnmount() {
 
     }
 

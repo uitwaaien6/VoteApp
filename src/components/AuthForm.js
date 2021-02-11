@@ -84,7 +84,7 @@ class AuthForm extends React.Component {
                                 onClick={(event) => {
 
                                     if (this.state.isForgetPassword) {
-                                        console.log('Sending password reset link');
+                                        this.props.passwordReset({ email: this.state.recoveryEmail });
                                     }
 
                                     this.setState({ ...this.state, isForgetPassword: true });
@@ -156,6 +156,21 @@ class AuthForm extends React.Component {
         );
     };
 
+    renderAuthInfo(message) {
+        if (message) {
+            return (
+                <div>
+                    <div className="auth-form__info">
+                        <p>{message}</p>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+
+    };
+
     renderForm(isLogin) {
 
         if (isLogin) {
@@ -204,19 +219,6 @@ class AuthForm extends React.Component {
         )
     };
 
-    renderAuthInfo(message) {
-        if (message) {
-            return (
-                <div className="auth-form__info">
-                    <p>{message}</p>
-                </div>
-            );
-        }
-
-        return null;
-
-    };
-
     componentDidMount() {
         this.props.clearAuthInfo();
     }
@@ -249,46 +251,57 @@ function mapDispatchToProps(dispatch) {
                 if (!email || !password) {
                     return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
-
                 const response = await votifyServer.post('/login', { email, password });
-
                 const { data } = response;
-
                 if (data.success) {
                     dispatch(actions.logIn({ role: data.role, success: data.success, msg: data.msg }));
                 }
 
             } catch (error) {
-
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong.' }));
             }
 
         },
         register: async ({ userName, email, password, passwordVerification }) => {
-            try {
 
+            try {
                 if (!userName || !email || !password || !passwordVerification) {
                     return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
-
                 const response = await votifyServer.post('/register', { userName, email, password, passwordVerification });
-
                 const { data } = response;
-
                 if (data.success) {
                     dispatch(actions.authInfo({ authInfo: data.msg }));
                 }
-
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
             }
+
+        },
+        passwordReset: async ({ email }) => {
+            try {
+
+                if (!email) {
+                    return dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
+                }
+
+                const response = await votifyServer.post('/password-reset/send-link', { email });
+                const { data } = response;
+                if (data.success) {
+                    dispatch(actions.authInfo({ authInfo: data.msg }));
+                }
+            } catch (error) {
+                dispatch(actions.authInfo({ authInfo: 'Error sending password reset link' }));
+            }
         },
         clearAuthInfo: () => {
+
             try {
                 dispatch(actions.authInfo({ authInfo: null }));
             } catch (error) {
                 
             }
+
         }
     };
 }

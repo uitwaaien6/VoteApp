@@ -8,6 +8,7 @@ import { FaInstagramSquare } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaYoutubeSquare } from 'react-icons/fa';
 import { FaDiscord } from 'react-icons/fa';
+import { FaGithubSquare } from 'react-icons/fa';
 
 // CSS
 import '../styles/components/Footer.css';
@@ -60,6 +61,9 @@ class Footer extends React.Component {
         return (
             <div className="footer__social">
                 <ul>
+                    <li>
+                        <a href="https://www.github.com/uitwaaien6" target="_blank" rel="noreferrer"><FaGithubSquare /></a>
+                    </li>
                     <li>
                         <a href="https://www.facebook.com/uitwaaien6" target="_blank" rel="noreferrer"><FaFacebookSquare /></a>
                     </li>
