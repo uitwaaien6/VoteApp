@@ -2,9 +2,13 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 // ACTION CREATERS
-import signInAction from '../actions/actions';
+import actions from '../actions/actions';
+
+// APIS
+import votifyServer from '../api/votifyServer';
 
 // CSS
 import '../styles/components/Header.css';
@@ -13,21 +17,63 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            isHamburgerMenu: false
+        }
+
+        this.onLogOut = this.onLogOut.bind(this);
     }
 
-    renderHeaderElements(items) {
+    async onLogOut() {
+        this.props.logOut();
+    }
+
+    renderAuthElements(isLoggedIn) {
+
+        if (isLoggedIn) {
+            return (
+                <ul>
+                    <li>Profile</li>
+                    <li
+                        onClick={this.onLogOut}
+                    >
+                        Log out
+                    </li>
+                </ul>
+            );
+        }
+
+        return null;
+    }
+
+    renderHeaderElements(isLoggedIn) {
         return (
-            <ul className="header__items">
-                {
-                    items.map((item, index) => {
-                        return (
-                            <li key={index}>{item}</li>
-                        );
-                    })
-                }
-            </ul>
+            <div className="header__default">
+                <h1>Votify</h1>
+
+                {this.renderAuthElements(isLoggedIn)}
+
+                <GiHamburgerMenu 
+                    onClick={() => {
+                        this.setState({ ...this.state, isHamburgerMenu: !this.state.isHamburgerMenu });
+                    }} 
+                    id="header-hamburger"
+                />
+
+            </div>
         )
+    }
+
+    renderHamburgerMenu(isHamburgerMenu, isLoggedIn) {
+        if (isHamburgerMenu && isLoggedIn) {
+            return (
+                <div className="header__hamburger">
+                    {this.renderAuthElements(this.props.isLoggedIn)}
+                </div>
+            );
+        };
+
+        return null;
     }
 
     componentDidMount() {
@@ -38,7 +84,8 @@ class Header extends React.Component {
         return (
             <div className="header__container">
                 <div className="header__content">
-                    {this.renderHeaderElements(["Votify"])}
+                    {this.renderHeaderElements(this.props.isLoggedIn)}
+                    {this.renderHamburgerMenu(this.state.isHamburgerMenu, this.props.isLoggedIn)}
                 </div>
             </div>
         );
@@ -47,14 +94,26 @@ class Header extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.auth.user,
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        signIn: () => {
-            dispatch(signInAction({ uuid: 'test', role: 'test' }));
+        logIn: () => {
+            try {
+                
+            } catch (error) {
+                
+            }
+        },
+        logOut: async () => {
+            const response = await votifyServer.get('/logout');
+            const { data } = response;
+            if (data.success) {
+                dispatch(actions.logOut({ authInfo: data.msg }));
+            }
         }
     }
 }

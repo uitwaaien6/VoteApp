@@ -1,3 +1,4 @@
+
 // NODE MODULES
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -53,3 +54,4 @@ class App extends React.Component {
 }
 
 export default App;
+

@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 // ACTIONS
 import actions from '../actions/actions';
 
+// API
+import votifyServer from '../api/votifyServer';
+
 // CSS
 import '../styles/components/AuthForm.css';
 
@@ -22,9 +25,35 @@ class AuthForm extends React.Component {
             recoveryEmail: '',
             isForgetPassword: false
         };
+
+        this.onAuthenticate = this.onAuthenticate.bind(this);
     }
 
     // AUTH FUNCTIONS
+    onAuthenticate(isLogin) {
+        if (isLogin) {
+
+            return () => {
+                console.log('Logging in')
+                this.props.logIn({ 
+                    email: this.state.email, 
+                    password: this.state.password 
+                });
+            }
+
+        } 
+
+        return () => {
+            console.log('Registering');
+            this.props.register({ 
+                userName: this.state.userName, 
+                email: this.state.email, 
+                password: this.state.password, 
+                passwordVerification: this.state.passwordVerification 
+            });
+        }
+
+    }
 
 
     // RENDER FUNCTIONS
@@ -106,16 +135,11 @@ class AuthForm extends React.Component {
         return (
             <>
                 <div>
-                    <Link>
-                        <button
-                            onClick={() => {
-                                this.props.logIn({ email: this.state.email, password: this.state.password });
-                            }}
-                        >
-                            {isLogin ? 'Log In' : 'Register'}
-                        </button>
-                    </Link>
-                    
+                    <button
+                        onClick={this.onAuthenticate(isLogin)}
+                    >
+                        {isLogin ? 'Log In' : 'Register'}
+                    </button>
                 </div>
 
                 {this.renderForgetPassword(isLogin)}
@@ -137,6 +161,7 @@ class AuthForm extends React.Component {
         if (isLogin) {
             return (
                 <div className="auth-form__form">
+                    {this.renderAuthInfo(this.props.authInfo)}
                     {this.renderEssentialInputs()}
                     {this.renderEssentialButtons(isLogin)}
                 </div>
@@ -145,6 +170,8 @@ class AuthForm extends React.Component {
 
         return (
             <div className="auth-form__form">
+
+                {this.renderAuthInfo(this.props.authInfo)}
 
                 <div>
                     <input 
@@ -177,16 +204,21 @@ class AuthForm extends React.Component {
         )
     };
 
-    renderAuthInformation() {
-        return (
-            <>
+    renderAuthInfo(message) {
+        if (message) {
+            return (
+                <div className="auth-form__info">
+                    <p>{message}</p>
+                </div>
+            );
+        }
 
-            </>
-        );
+        return null;
+
     };
 
     componentDidMount() {
-
+        this.props.clearAuthInfo();
     }
 
     render() {
@@ -200,18 +232,65 @@ class AuthForm extends React.Component {
     };
 }
 
+
 function mapStateToProps(state) {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        authInfo: state.auth.authInfo
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        logIn: ({ email, password }) => {
-            dispatch(actions.logInAction({ uuid: 1, role: 'admin' }));
+        logIn: async ({ email, password }) => {
+
+            try {
+
+                if (!email || !password) {
+                    return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
+                }
+
+                const response = await votifyServer.post('/login', { email, password });
+
+                const { data } = response;
+
+                if (data.success) {
+                    dispatch(actions.logIn({ role: data.role, success: data.success, msg: data.msg }));
+                }
+
+            } catch (error) {
+
+                dispatch(actions.authInfo({ authInfo: 'Something went wrong.' }));
+            }
+
+        },
+        register: async ({ userName, email, password, passwordVerification }) => {
+            try {
+
+                if (!userName || !email || !password || !passwordVerification) {
+                    return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
+                }
+
+                const response = await votifyServer.post('/register', { userName, email, password, passwordVerification });
+
+                const { data } = response;
+
+                if (data.success) {
+                    dispatch(actions.authInfo({ authInfo: data.msg }));
+                }
+
+            } catch (error) {
+                dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+            }
+        },
+        clearAuthInfo: () => {
+            try {
+                dispatch(actions.authInfo({ authInfo: null }));
+            } catch (error) {
+                
+            }
         }
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);

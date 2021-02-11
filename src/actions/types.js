@@ -1,10 +1,13 @@
 
-const SIGN_IN = 'SIGN_IN';
-const SIGN_OUT = 'SIGN_OUT';
+const LOG_IN = 'LOG_IN';
+const LOG_OUT = 'LOG_OUT';
+
+const AUTH_INFO = 'AUTH_INFO';
 
 const types = {
-    SIGN_IN,
-    SIGN_OUT
+    LOG_IN,
+    LOG_OUT,
+    AUTH_INFO
 }
 
 export default types;

@@ -1,16 +1,33 @@
 
+
 // ACTION TYPES
 import types from './types';
 
-function logInAction(payload) {
+function logIn(payload) {
     return {
-        type: types.SIGN_IN,
+        type: types.LOG_IN,
+        payload
+    }
+}
+
+function logOut(payload) {
+    return {
+        type: types.LOG_OUT,
+        payload
+    }
+}
+
+function authInfo(payload) {
+    return {
+        type: types.AUTH_INFO,
         payload
     }
 }
 
 const actions = {
-    logInAction
+    logIn,
+    logOut,
+    authInfo
 }
 
 export default actions;

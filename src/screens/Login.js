@@ -1,10 +1,14 @@
 
 // NODE MODULES
 import React from 'react';
+import { connect } from 'react-redux';
 
 // COMPONENTS 
 import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
+
+// API
+import votifyServer from '../api/votifyServer';
 
 // ACTIONS
 //import actions from '../actions/actions';
@@ -33,6 +37,19 @@ class Login extends React.Component {
     };
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.auth.user
+    }
+}
 
+function mapDispatchToProps(dispatch) {
+    return {
+        logIn: async ({ email, password }) => {
+            const response = await votifyServer.post('/login', { email, password });
+            console.log(response);
+        }
+    };
+}
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

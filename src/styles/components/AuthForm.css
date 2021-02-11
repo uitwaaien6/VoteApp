@@ -44,6 +44,16 @@
     transition: all 0.2s ease-in-out;
 }
 
+.auth-form__info {
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.7rem;
+    font-size: 1.2rem;
+    color: yellow;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
 .auth-form__form > div button:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }   
