@@ -2,7 +2,6 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 // NODE MODULES > REACT ICONS
 import { VscLoading } from 'react-icons/vsc';

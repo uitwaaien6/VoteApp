@@ -249,7 +249,7 @@ function mapDispatchToProps(dispatch) {
 
                 dispatch(actions.loading(true));
                 if (!email || !password) {
-                    return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
+                    dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
                 const response = await votifyServer.post('/login', { email, password });
                 const { data } = response;
@@ -261,7 +261,10 @@ function mapDispatchToProps(dispatch) {
 
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong.' }));
+                dispatch(actions.loading(false));
             }
+
+            dispatch(actions.loading(false));
 
         },
         register: async ({ userName, email, password, passwordVerification }) => {
@@ -269,7 +272,7 @@ function mapDispatchToProps(dispatch) {
             try {
                 dispatch(actions.loading(true));
                 if (!userName || !email || !password || !passwordVerification) {
-                    return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
+                    dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
                 const response = await votifyServer.post('/register', { userName, email, password, passwordVerification });
                 const { data } = response;
@@ -279,14 +282,17 @@ function mapDispatchToProps(dispatch) {
                 dispatch(actions.loading(false));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+                dispatch(actions.loading(false));
             }
+
+            dispatch(actions.loading(false));
 
         },
         passwordReset: async ({ email }) => {
             try {
                 dispatch(actions.loading(true));
                 if (!email) {
-                    return dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
+                    dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
                 }
 
                 const response = await votifyServer.post('/password-reset/send-link', { email });
@@ -297,7 +303,10 @@ function mapDispatchToProps(dispatch) {
                 dispatch(actions.loading(false));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Error sending password reset link' }));
+                dispatch(actions.loading(false));
             }
+
+            dispatch(actions.loading(false));
         },
         clearAuthInfo: () => {
 
@@ -305,8 +314,10 @@ function mapDispatchToProps(dispatch) {
                 
                 dispatch(actions.authInfo({ authInfo: null }));
             } catch (error) {
-                
+                dispatch(actions.loading(false));
             }
+
+            dispatch(actions.loading(false));
 
         }
     };
