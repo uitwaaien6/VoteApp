@@ -1,18 +1,17 @@
-.loading__container {
-    position: absolute;
+.loading__icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    cursor: wait;
+    position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
-    cursor: wait;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 #loading__icon {
     animation: rotation 2s infinite linear;
-    font-size: 5rem;
+    font-size: 6rem;
 }
 
 @keyframes rotation {
@@ -22,4 +21,4 @@
     to {
       transform: rotate(359deg);
     }
-  }
+}

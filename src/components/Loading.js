@@ -22,12 +22,10 @@ class Loading extends React.Component {
     renderLoadingIcon(loading) {
         if (loading) {
             return (
-                <div className="loading__container">
-                    <div className="loading__content">
-                        <VscLoading
-                            id="loading__icon"
-                        />
-                    </div>
+                <div className="loading__icon">
+                    <VscLoading
+                        id="loading__icon"
+                    />
                 </div>
             );
         };
@@ -41,7 +39,11 @@ class Loading extends React.Component {
 
     render() {
         return (
-            this.renderLoadingIcon(this.props.loading)
+            <div className="loading__container">
+                <div className="loading__content">
+                    {this.renderLoadingIcon(this.props.loading)}
+                </div>
+            </div>
         );
     };
 }
