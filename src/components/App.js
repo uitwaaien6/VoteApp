@@ -13,6 +13,7 @@ import Register from '../screens/Register';
 // COMPONENTS
 //import Header from './Header';
 import Footer from './Footer';
+import Loading from './Loading';
 
 // STORE
 import store from '../stores/store';
@@ -37,6 +38,7 @@ class App extends React.Component {
                 <Router>
                     <div className="app__container">
                         <div className="app__content">
+                            <Loading />
                             <Switch>
                                 <Route path="/" exact component={Home} />
                                 <Route path="/login" exact component={Login} />

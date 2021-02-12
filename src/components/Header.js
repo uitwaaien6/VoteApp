@@ -49,7 +49,11 @@ class Header extends React.Component {
                     <li
                         onClick={this.onLogOut}
                     >
-                        Log out
+                        <Link
+                            
+                        >
+                            Log out
+                        </Link>
                     </li>
                 </ul>
             );
@@ -149,11 +153,18 @@ function mapDispatchToProps(dispatch) {
             }
         },
         logOut: async () => {
-            const response = await votifyServer.get('/logout');
-            const { data } = response;
-            if (data.success) {
-                dispatch(actions.logOut({ authInfo: data.msg }));
+            try {
+                dispatch(actions.loading(true));
+                const response = await votifyServer.get('/logout');
+                const { data } = response;
+                if (data.success) {
+                    dispatch(actions.logOut({ authInfo: data.msg }));
+                }
+                dispatch(actions.loading(false));
+            } catch (error) {
+                
             }
+
         }
     }
 }

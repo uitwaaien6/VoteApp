@@ -9,3 +9,4 @@ const instance = axios.create({
 });
 
 export default instance;
+// TODO Remove localhost with the real domain address.

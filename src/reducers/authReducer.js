@@ -8,7 +8,8 @@ const initialValue = {
         role: null
     },
     isLoggedIn: false,
-    authInfo: null
+    loading: false,
+    authInfo: null,
 }
 
 export default function authReducer(state = initialValue, action) {
@@ -31,6 +32,7 @@ export default function authReducer(state = initialValue, action) {
         case types.LOG_OUT:
             return {
                 ...state,
+                user: { role: null },
                 isLoggedIn: false,
                 authInfo: action.payload.authInfo
             }
@@ -38,9 +40,13 @@ export default function authReducer(state = initialValue, action) {
         case types.AUTH_INFO:
             return { 
                 ...state,
-                user: { role: null },
-                isLoggedIn: false,
                 authInfo: action.payload.authInfo
+            };
+
+        case types.LOADING:
+            return {
+                ...state,
+                loading: action.payload
             };
 
         default:

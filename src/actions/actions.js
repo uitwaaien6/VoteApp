@@ -24,10 +24,18 @@ function authInfo(payload) {
     }
 }
 
+function loading(payload) {
+    return {
+        type: types.LOADING,
+        payload
+    }
+}
+
 const actions = {
     logIn,
     logOut,
-    authInfo
+    authInfo,
+    loading
 }
 
 export default actions;

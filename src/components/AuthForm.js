@@ -79,20 +79,18 @@ class AuthForm extends React.Component {
                     }
 
                     <div>
-                        <Link>
-                            <button
-                                onClick={(event) => {
+                        <button
+                            onClick={(event) => {
 
-                                    if (this.state.isForgetPassword) {
-                                        this.props.passwordReset({ email: this.state.recoveryEmail });
-                                    }
+                                if (this.state.isForgetPassword) {
+                                    this.props.passwordReset({ email: this.state.recoveryEmail });
+                                }
 
-                                    this.setState({ ...this.state, isForgetPassword: true });
-                                }}
-                            >
-                                {this.state.isForgetPassword ? "Send Password Reset Link to the email above." : "Forgot your password ?"} 
-                            </button>
-                        </Link>
+                                this.setState({ ...this.state, isForgetPassword: true });
+                            }}
+                        >
+                            {this.state.isForgetPassword ? "Send Password Reset Link to the email above." : "Forgot your password ?"} 
+                        </button>
                     </div>
 
                 </>
@@ -238,7 +236,8 @@ class AuthForm extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.auth.user,
-        authInfo: state.auth.authInfo
+        authInfo: state.auth.authInfo,
+        loading: state.auth.loading
     }
 }
 
@@ -248,6 +247,7 @@ function mapDispatchToProps(dispatch) {
 
             try {
 
+                dispatch(actions.loading(true));
                 if (!email || !password) {
                     return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
@@ -257,6 +257,8 @@ function mapDispatchToProps(dispatch) {
                     dispatch(actions.logIn({ role: data.role, success: data.success, msg: data.msg }));
                 }
 
+                dispatch(actions.loading(false));
+
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong.' }));
             }
@@ -265,6 +267,7 @@ function mapDispatchToProps(dispatch) {
         register: async ({ userName, email, password, passwordVerification }) => {
 
             try {
+                dispatch(actions.loading(true));
                 if (!userName || !email || !password || !passwordVerification) {
                     return dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
@@ -273,6 +276,7 @@ function mapDispatchToProps(dispatch) {
                 if (data.success) {
                     dispatch(actions.authInfo({ authInfo: data.msg }));
                 }
+                dispatch(actions.loading(false));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
             }
@@ -280,7 +284,7 @@ function mapDispatchToProps(dispatch) {
         },
         passwordReset: async ({ email }) => {
             try {
-
+                dispatch(actions.loading(true));
                 if (!email) {
                     return dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
                 }
@@ -290,6 +294,7 @@ function mapDispatchToProps(dispatch) {
                 if (data.success) {
                     dispatch(actions.authInfo({ authInfo: data.msg }));
                 }
+                dispatch(actions.loading(false));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: 'Error sending password reset link' }));
             }
@@ -297,6 +302,7 @@ function mapDispatchToProps(dispatch) {
         clearAuthInfo: () => {
 
             try {
+                
                 dispatch(actions.authInfo({ authInfo: null }));
             } catch (error) {
                 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 // COMPONENTS 
 import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
+import Loading from '../components/Loading';
 
 // API
 import votifyServer from '../api/votifyServer';
@@ -17,7 +18,20 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {};
+
+        this.checkAuthStatus = this.checkAuthStatus.bind(this);
+    }
+
+    async checkAuthStatus() {
+        try {
+            const { data } = await votifyServer.get('/check-auth-status');
+            if (data.success) {
+
+            }
+        } catch (error) {
+            
+        }
     }
 
     componentDidMount() {
@@ -39,17 +53,9 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        isLoading: state.auth.isLoading
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        logIn: async ({ email, password }) => {
-            const response = await votifyServer.post('/login', { email, password });
-            console.log(response);
-        }
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, null)(Login);

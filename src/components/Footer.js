@@ -1,7 +1,10 @@
 
 // NODE MODULES
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+// NODE MODULES > REACT ICONS
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaTwitterSquare } from 'react-icons/fa';
 import { FaInstagramSquare } from 'react-icons/fa';
@@ -9,6 +12,7 @@ import { FaLinkedin } from 'react-icons/fa';
 import { FaYoutubeSquare } from 'react-icons/fa';
 import { FaDiscord } from 'react-icons/fa';
 import { FaGithubSquare } from 'react-icons/fa';
+import { FaSnapchatSquare } from 'react-icons/fa';
 
 // CSS
 import '../styles/components/Footer.css';
@@ -28,9 +32,11 @@ class Footer extends React.Component {
                     {
                         items.map((item, index) => {
                             return (
-                                <li key={index}>
+                                <li
+                                    key={index}
+                                >
                                     <Link
-                                        to={`/${item.replace(' ', '-').toLowerCase()}`}
+                                        to={`/${(item.replace(' ', '-').toLowerCase())}`}
                                     >
                                         {item}
                                     </Link>
@@ -59,35 +65,62 @@ class Footer extends React.Component {
 
                 {this.renderItems(['CONTACT US', 'ABOUT US', 'RESOURCES'])}
                 {this.renderItems(['SOFTWARE', 'BUSINESSES', 'SERVICES'])}
+                {this.props.isLoggedIn ? null : this.renderItems(['LOGIN', 'REGISTER'])}
             </div>
         );
     };
 
     renderSocial() {
+
+        const data = [
+            {
+                url: 'https://www.github.com/uitwaaien6',
+                icon: <FaGithubSquare />
+            },
+            {
+                url: 'https://www.facebook.com/uitwaaien6',
+                icon: <FaFacebookSquare />
+            },
+            {
+                url: 'https://www.twitter.com/uitwaaien_6',
+                icon: <FaTwitterSquare />
+            },
+            {
+                url: 'https://www.snapchat.com/add/ruzgar_ata',
+                icon: <FaSnapchatSquare />
+            },
+            {
+                url: 'https://www.instagram.com/ruzgar.ata',
+                icon: <FaInstagramSquare />
+            },
+            {
+                url: 'https://www.linkedin.com/in/ruzgar-ata-ozkan',
+                icon: <FaLinkedin />
+            },
+            {
+                url: 'https://www.youtube.com/channel/UC929IQUbYGJnpnMBlP_sepQ',
+                icon: <FaYoutubeSquare />
+            },
+            {
+                url: 'https://discord.gg/Vzs6cFBs79',
+                icon: <FaDiscord />
+            },
+        ]
+
         return (
             <div className="footer__social">
                 <ul>
-                    <li>
-                        <a href="https://www.github.com/uitwaaien6" target="_blank" rel="noreferrer"><FaGithubSquare /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/uitwaaien6" target="_blank" rel="noreferrer"><FaFacebookSquare /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.twitter.com/uitwaaien_6" target="_blank" rel="noreferrer"><FaTwitterSquare /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/ruzgar.ata" target="_blank" rel="noreferrer"><FaInstagramSquare /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/in/ruzgar-ata-ozkan" target="_blank" rel="noreferrer"><FaLinkedin /></a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/channel/UC929IQUbYGJnpnMBlP_sepQ" target="_blank" rel="noreferrer"><FaYoutubeSquare /></a>
-                    </li>
-                    <li>
-                        <a href="https://discord.gg/Vzs6cFBs79" target="_blank" rel="noreferrer"><FaDiscord /></a>
-                    </li>
+                    {
+                        data.map((item, index) => {
+                            return (
+                                <li
+                                    key={index}
+                                >
+                                    <a href={item.url} target="_blank" rel="noreferref">{item.icon}</a>
+                                </li>
+                            );
+                        })
+                    }
                 </ul>
             </div>
         );
@@ -114,4 +147,10 @@ class Footer extends React.Component {
     };
 }
 
-export default Footer;
+function mapStateToProps(state) {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps, null)(Footer);
