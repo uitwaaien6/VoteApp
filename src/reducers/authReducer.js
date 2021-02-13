@@ -5,7 +5,10 @@ import types from '../actions/types';
 // initial values
 const initialValue = {
     user: {
-        role: null
+        role: null,
+        emailVerified: false,
+        email: '',
+        userName: ''
     },
     isLoggedIn: false,
     loading: false,
@@ -15,12 +18,19 @@ const initialValue = {
 export default function authReducer(state = initialValue, action) {
     switch (action.type) {
         case types.LOG_IN:
-            
+        
+            const { success, msg, role, emailVerified, email, userName } = action.payload;
+
             return { 
                 ...state, 
-                user: { role: action.payload.role }, 
-                isLoggedIn: action.payload.success, 
-                authInfo: action.payload.msg  
+                user: { 
+                    role,
+                    emailVerified,
+                    email,
+                    userName
+                }, 
+                isLoggedIn: success, 
+                authInfo: msg  
             };
             
         case types.REGISTER:

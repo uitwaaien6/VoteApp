@@ -21,7 +21,8 @@ class Footer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {};
+
     }
 
     renderItems(items) {
@@ -116,7 +117,7 @@ class Footer extends React.Component {
                                 <li
                                     key={index}
                                 >
-                                    <a href={item.url} target="_blank" rel="noreferref">{item.icon}</a>
+                                    <a href={item.url} target="_blank" rel="noreferrer">{item.icon}</a>
                                 </li>
                             );
                         })
@@ -136,7 +137,9 @@ class Footer extends React.Component {
                 <div className="footer__content">
 
                     {this.renderList()}
+
                     <hr />
+                    
                     {this.renderSocial()}
 
                     <p>© All Rights Reserved.</p>

@@ -55,7 +55,6 @@ class AuthForm extends React.Component {
 
     }
 
-
     // RENDER FUNCTIONS
     renderForgetPassword(isLogin) {
         if (isLogin) {

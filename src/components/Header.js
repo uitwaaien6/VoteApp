@@ -106,7 +106,6 @@ class Header extends React.Component {
     }
 
     handleResize() {
-        console.log(window.innerWidth);
         if (this.hamburgerMenu.current && window.innerWidth > 900) {
             this.setState({ ...this.state, isHamburgerMenu: false });
         }
@@ -145,14 +144,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logIn: () => {
-            try {
-                
-            } catch (error) {
-                
-            }
-        },
         logOut: async () => {
+
             try {
                 dispatch(actions.loading(true));
                 const response = await votifyServer.get('/logout');
@@ -162,8 +155,11 @@ function mapDispatchToProps(dispatch) {
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                
+                dispatch(actions.authInfo({ authInfo: error.message }));
+                dispatch(actions.loading(false));
             }
+
+            dispatch(actions.loading(false));
 
         }
     }

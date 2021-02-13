@@ -1,10 +1,14 @@
 
 // NODE MODULES
 import React from 'react';
+import { connect } from 'react-redux';
 
 // COMPONENTS
 import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
+
+// API
+import checkAuthStatus from '../api/checkAuthStatus'; // dispatch function
 
 class Register extends React.Component {
 
@@ -14,7 +18,7 @@ class Register extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.checkAuthStatus();
     }
 
     render() {
@@ -29,4 +33,17 @@ class Register extends React.Component {
     };
 }
 
-export default Register;
+function mapStateToProps(state) {
+    return {
+        user: state.auth.user,
+        isLoading: state.auth.isLoading
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        checkAuthStatus: checkAuthStatus(dispatch, ownProps) // returns a function
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

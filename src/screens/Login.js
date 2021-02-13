@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 // COMPONENTS 
 import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
-import Loading from '../components/Loading';
 
 // API
-import votifyServer from '../api/votifyServer';
+import checkAuthStatus from '../api/checkAuthStatus';
 
 // ACTIONS
-//import actions from '../actions/actions';
+// import actions from '../actions/actions';
 
 class Login extends React.Component {
 
@@ -20,22 +19,11 @@ class Login extends React.Component {
         super(props);
         this.state = {};
 
-        this.checkAuthStatus = this.checkAuthStatus.bind(this);
-    }
 
-    async checkAuthStatus() {
-        try {
-            const { data } = await votifyServer.get('/check-auth-status');
-            if (data.success) {
-
-            }
-        } catch (error) {
-            
-        }
     }
 
     componentDidMount() {
-
+        this.props.checkAuthStatus();
     }
 
     render() {
@@ -58,4 +46,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(Login);
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        checkAuthStatus: checkAuthStatus(dispatch, ownProps)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
