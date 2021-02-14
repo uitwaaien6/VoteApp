@@ -1,20 +1,24 @@
 
 .footer__container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     background-color: rgba(0, 0, 0, 1);
 }
 
 .footer__content {
-    text-align: center;
-    width: 80%;
+    width: 90%;
     padding: 3rem;
     color: white;
 }
 
 .footer__content > hr {
     border: 0.1px solid rgb(78, 78, 78);
+}
+
+.footer__content > p {
+    text-align: center;
 }
 
 .footer__list {
@@ -41,7 +45,8 @@
 }
 
 .footer__items > li  {
-    padding: 0.3rem;
+    font-size: 0.9rem;
+    padding: 0.2rem;
 }
 
 .footer__items > li > a {

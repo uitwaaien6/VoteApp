@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import AuthForm from '../components/AuthForm';
 
 // API
@@ -25,8 +25,9 @@ class Register extends React.Component {
         return (
             <div className="login__container">
                 <div className="login__content">
-                    <Header />
-                    <AuthForm />
+                    <AuthForm
+                        history={this.props.history} // we pass the history object which comes from the router component
+                    />
                 </div>
             </div>
         );

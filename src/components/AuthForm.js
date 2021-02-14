@@ -9,10 +9,12 @@ import actions from '../actions/actions';
 
 // API
 import votifyServer from '../api/votifyServer';
+// import checkAuthStatus from '../api/checkAuthStatus'; // dispatch function
 
 // CSS
 import '../styles/components/AuthForm.css';
 
+// AuthForm configures itself with the pathname of location url, it will be register form by default but if the url is === login it will configure itself to login form
 class AuthForm extends React.Component {
 
     constructor(props) {
@@ -23,18 +25,18 @@ class AuthForm extends React.Component {
             password: '',
             passwordVerification: '',
             recoveryEmail: '',
-            isForgetPassword: false
+            isForgetPassword: false,
+            formType: window.location.pathname.replace('/', '')
         };
 
         this.onAuthenticate = this.onAuthenticate.bind(this);
     }
 
     // AUTH FUNCTIONS
-    onAuthenticate(isLogin) {
-        if (isLogin) {
+    onAuthenticate(formType) { // configuration for which authentication button should we use login or register ? 
+        if (formType === 'login') {
 
             return () => {
-                console.log('Logging in')
                 this.props.logIn({ 
                     email: this.state.email, 
                     password: this.state.password 
@@ -44,7 +46,6 @@ class AuthForm extends React.Component {
         } 
 
         return () => {
-            console.log('Registering');
             this.props.register({ 
                 userName: this.state.userName, 
                 email: this.state.email, 
@@ -56,8 +57,8 @@ class AuthForm extends React.Component {
     }
 
     // RENDER FUNCTIONS
-    renderForgetPassword(isLogin) {
-        if (isLogin) {
+    renderForgetPassword(formType) {
+        if (formType === 'login') {
             return (
 
                 <>
@@ -128,23 +129,27 @@ class AuthForm extends React.Component {
         );
     };
 
-    renderEssentialButtons(isLogin) {
+    renderEssentialButtons(formType) {
         return (
             <>
                 <div>
                     <button
-                        onClick={this.onAuthenticate(isLogin)}
+                        onClick={this.onAuthenticate(formType)}
                     >
-                        {isLogin ? 'Log In' : 'Register'}
+                        {formType === 'login' ? 'Log In' : 'Register'}
                     </button>
                 </div>
 
-                {this.renderForgetPassword(isLogin)}
+                {this.renderForgetPassword(formType)}
 
                 <div>
-                    <Link to={isLogin ? "/register" : "/login"}>
+                    <Link to={formType === 'login' ? "/register" : "/login"}>
                         <button>
-                            {isLogin ? "Don't have an account ? Register instead it's free." : "Already have an account ? Log in instead"}
+                            {
+                                formType === 'login' ?
+                                "Don't have an account ? Register instead it's free." : 
+                                "Already have an account ? Log in instead"
+                            }
                         </button>
                     </Link>
                 </div>
@@ -168,14 +173,14 @@ class AuthForm extends React.Component {
 
     };
 
-    renderForm(isLogin) {
+    renderForm(formType) {
 
-        if (isLogin) {
+        if (formType === 'login') {
             return (
                 <div className="auth-form__form">
                     {this.renderAuthInfo(this.props.authInfo)}
                     {this.renderEssentialInputs()}
-                    {this.renderEssentialButtons(isLogin)}
+                    {this.renderEssentialButtons(formType)}
                 </div>
             );
         };
@@ -210,7 +215,7 @@ class AuthForm extends React.Component {
                     />
                 </div>
 
-                {this.renderEssentialButtons(isLogin)}
+                {this.renderEssentialButtons(formType)}
 
             </div>
         )
@@ -224,7 +229,7 @@ class AuthForm extends React.Component {
         return (
             <div className="auth-form__container">
                 <div className="auth-form__content">
-                    {this.renderForm(this.props.login)}
+                    {this.renderForm(this.state.formType)}
                 </div>
             </div>
         );
@@ -240,7 +245,7 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
     return {
         logIn: async ({ email, password }) => {
 
@@ -253,7 +258,11 @@ function mapDispatchToProps(dispatch) {
                 const response = await votifyServer.post('/login', { email, password });
                 const { data } = response;
                 if (data.success) {
-                    dispatch(actions.logIn({ role: data.role, success: data.success, msg: data.msg }));
+                    dispatch(actions.logIn(data));
+                    // navigate user to the profile with the ownProps,
+                    // ownProps doesnt contain anything but the dispatch functions as it is not passed to the router component
+                    // so we manually pass the history object to the AuthForm.js from Login and Register
+                    ownProps.history.push('/profile');
                 }
 
                 dispatch(actions.loading(false));

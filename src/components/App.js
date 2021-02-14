@@ -9,9 +9,10 @@ import Home from '../screens/Home';
 import Votes from '../screens/Votes';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
+import Profile from '../screens/Profile';
 
 // COMPONENTS
-//import Header from './Header';
+import Header from './Header';
 import Footer from './Footer';
 import Loading from './Loading';
 
@@ -38,14 +39,19 @@ class App extends React.Component {
                 <Router>
                     <div className="app__container">
                         <div className="app__content">
+
                             <Loading />
+
+                            <Header />
                             <Switch>
                                 <Route path="/" exact component={Home} />
                                 <Route path="/login" exact component={Login} />
                                 <Route path="/register" exact component={Register} />
+                                <Route path="/profile" exact component={Profile} />
                                 <Route path="/votes" exact component={Votes} />
                             </Switch>
                             <Footer />
+
                         </div>  
                     </div>
                 </Router>

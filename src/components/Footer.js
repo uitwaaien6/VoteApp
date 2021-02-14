@@ -64,8 +64,8 @@ class Footer extends React.Component {
                     </Link>
                 </div>
 
-                {this.renderItems(['CONTACT US', 'ABOUT US', 'RESOURCES'])}
-                {this.renderItems(['SOFTWARE', 'BUSINESSES', 'SERVICES'])}
+                {this.renderItems(['ABOUT US', 'CONTACT US', 'RESOURCES'])}
+                {this.renderItems([ 'SERVICES', 'SOFTWARE', 'BUSINESSES'])}
                 {this.props.isLoggedIn ? null : this.renderItems(['LOGIN', 'REGISTER'])}
             </div>
         );

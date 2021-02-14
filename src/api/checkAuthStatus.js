@@ -10,24 +10,21 @@ export default function checkAuthStatus(dispatch, ownProps) {
 
     return async () => {
         try {
-
-            dispatch(actions.loading(true));
             
             const response = await votifyServer.get('/check-auth-status');
             const { data } = response;
 
             if (data.success) {
-                dispatch(actions.logIn(data));
+                console.log(ownProps);
                 ownProps.history.push('/profile');
+                dispatch(actions.logIn(data));
+                return;
             }
 
-            dispatch(actions.loading(false));
         } catch (error) {
             console.log(error);
-            dispatch(actions.loading(false));
         }
 
-        dispatch(actions.loading(false));
     }
 
 }

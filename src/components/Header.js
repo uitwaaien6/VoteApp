@@ -68,6 +68,14 @@ class Header extends React.Component {
                         Log in
                     </Link>
                 </li>
+
+                <li>
+                    <Link
+                        to="/register"
+                    >
+                        Register
+                    </Link>
+                </li>
             </ul>
         );
     }
@@ -107,15 +115,14 @@ class Header extends React.Component {
 
     handleResize() {
         if (this.hamburgerMenu.current && window.innerWidth > 900) {
+
             this.setState({ ...this.state, isHamburgerMenu: false });
         }
     }
 
     componentDidMount() {
 
-        window.addEventListener('load', () => {
-            window.addEventListener('resize', this.handleResize);
-        });
+        window.addEventListener('resize', this.handleResize);
 
     }
 
