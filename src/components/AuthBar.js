@@ -19,6 +19,8 @@ class AuthBar extends React.Component {
         };
 
         this.authBarItems = React.createRef();
+
+        this.handleResize = this.handleResize.bind(this);
     }
 
     renderHamburgerIcon(isAuthBarOpen) {
@@ -29,7 +31,7 @@ class AuthBar extends React.Component {
 
                         this.setState({ ...this.state, isAuthBarOpen: !this.state.isAuthBarOpen });
 
-                        if (this.authBarItems.current) {
+                        if (this.authBarItems.current && window.innerWidth < 900) {
 
                             if (this.state.isAuthBarOpen) {
                                 return this.authBarItems.current.style.left = '20%';
@@ -54,27 +56,19 @@ class AuthBar extends React.Component {
                     ref={this.authBarItems}
                 >
                     <ul>
-                        <li>
-                            <Link
-                                to="/votes"
-                            >
-                                Votes
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/votes"
-                            >
-                                Votes
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/votes"
-                            >
-                                Votes
-                            </Link>
-                        </li>
+
+                        <Link to="/votes">
+                            <li>Votes</li>
+                        </Link>
+
+                        <Link to="/profile">
+                            <li>Profile</li>
+                        </Link>
+
+                        <Link to="/votes">
+                            <li> Votes</li>
+                        </Link>
+
                     </ul>
                 </div>
             );
@@ -83,10 +77,22 @@ class AuthBar extends React.Component {
         return null;
     }
 
+    handleResize() {
+
+        if (this.authBarItems.current) {
+
+            if (window.innerWidth > 900) {
+                return this.authBarItems.current.style.left = '0%';
+            }
+
+            return this.authBarItems.current.style.left = '20%';
+
+        }
+
+    }
+
     componentDidMount() {
-        window.addEventListener('load', () => {
-            console.log(this.authBarItems.current);
-        });
+        window.addEventListener('resize', this.handleResize);
     }
 
     render() {
@@ -95,7 +101,6 @@ class AuthBar extends React.Component {
                 <div className="auth-bar__content">
                     {this.renderHamburgerIcon(false)}
                     {this.renderBarItems(null, this.state.isAuthBarOpen)}
-
                 </div>
             </div>
         );

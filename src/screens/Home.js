@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 // COMPONENTS 
 import AuthBar from '../components/AuthBar';
 
+// CSS
+import '../styles/screens/Home.css'
+
 class Home extends React.Component {
 
     constructor(props) {

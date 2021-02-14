@@ -1,34 +1,44 @@
 
 .auth-bar__container {
-    border: 1px solid black;
     width: 25%;
+
 }
 
 .auth-bar__content {
     display: flex;
     justify-content: left;
-    align-items: center;
+    align-items: baseline;
 }
 
 .auth-bar__items {
-    padding: 2rem;
+    width: 100%;
+    text-align: center;
     position: relative;
-    left: 20%;
     transition: all 0.2s ease-in-out;
+    background-color: white;
+    box-shadow: 1px 1px 30px black;
+
 }
 
 .auth-bar__items > ul {
     list-style: none;
+
 }
 
-.auth-bar__items > ul > li {
-    
+.auth-bar__items > ul li {
+    padding: 0.5rem;
     font-size: 2rem;
-    padding: 1rem 0rem;
     border-bottom: 1px solid black;
+    width: 100%;
+    transition: all 0.2s ease-out;
 }
 
-.auth-bar__items > ul > li > a {
+.auth-bar__items > ul li:hover {
+    background-color: rgb(180, 92, 33);
+    color:white ;
+}
+
+.auth-bar__items > ul > a {
     text-decoration: none;
     color: rgb(180, 92, 33);
 }
@@ -45,8 +55,13 @@
 @media only screen and (max-width: 900px) {
 
     .auth-bar__container {
-        width: 70%;
+        width: 60%;
+        box-shadow: none;
+    }
 
+    .auth-bar__items {
+        width: 80%;
+        left: 20%;
     }
 
     #auth-bar__hamburger {
