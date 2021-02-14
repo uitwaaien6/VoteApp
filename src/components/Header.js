@@ -2,7 +2,7 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 // REACT ICONS
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -46,14 +46,11 @@ class Header extends React.Component {
                             Profile
                         </Link>
                     </li>
-                    <li
-                        onClick={this.onLogOut}
-                    >
-                        <Link
-                            
-                        >
-                            Log out
-                        </Link>
+
+                    <li onClick={this.onLogOut}>
+                        <Route
+                            render={({ history }) => <Link onClick={() => history.push('/login')}>Log out</Link>}
+                        />
                     </li>
                 </ul>
             );
@@ -105,7 +102,7 @@ class Header extends React.Component {
                     ref={this.hamburgerMenu}
                     className="header__hamburger"
                 >
-                    {this.renderAuthElements(this.props.isLoggedIn)}
+                    {this.renderAuthElements(isLoggedIn)}
                 </div>
             );
         };
@@ -121,9 +118,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-
         window.addEventListener('resize', this.handleResize);
-
     }
 
     componentWillUnmount() {

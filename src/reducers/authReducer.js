@@ -12,7 +12,7 @@ const initialValue = {
     },
     isLoggedIn: false,
     loading: false,
-    authInfo: null,
+    authInfo: null
 }
 
 export default function authReducer(state = initialValue, action) {

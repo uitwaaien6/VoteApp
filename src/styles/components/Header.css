@@ -1,12 +1,3 @@
-.header__container {
-
-
-}
-
-.header__content {
-    
-}   
-
 .header__content > div {
     display: flex;
     justify-content: space-evenly;

@@ -19,11 +19,11 @@ class Login extends React.Component {
         super(props);
         this.state = {};
 
-
     }
 
     componentDidMount() {
         this.props.checkAuthStatus();
+        console.log(this.props);
     }
 
     render() {
