@@ -21,8 +21,11 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isHamburgerMenu: false
+            isHamburgerMenu: false,
+            
         }
+
+        this.hamburgerTimerId = null;
 
         this.hamburgerMenu = React.createRef();
 
@@ -113,7 +116,15 @@ class Header extends React.Component {
     handleResize() {
         if (this.hamburgerMenu.current && window.innerWidth > 900) {
 
-            this.setState({ ...this.state, isHamburgerMenu: false });
+            // for performance purposes, update the hamburger menu after the resize and 100 milliseconds after
+            if (this.hamburgerTimerId) {
+                clearTimeout(this.hamburgerTimerId);
+            }
+
+            this.hamburgerTimerId = setTimeout(() => {
+                this.setState({ ...this.state, isHamburgerMenu: false });
+            }, 100);
+
         }
     }
 

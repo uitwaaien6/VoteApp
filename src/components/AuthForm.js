@@ -11,6 +11,9 @@ import actions from '../actions/actions';
 import votifyServer from '../api/votifyServer';
 // import checkAuthStatus from '../api/checkAuthStatus'; // dispatch function
 
+// VALIDATORS
+import authValidators from '../validators/authValidators';
+
 // CSS
 import '../styles/components/AuthForm.css';
 
@@ -252,7 +255,8 @@ function mapDispatchToProps(dispatch, ownProps) {
             try {
 
                 dispatch(actions.loading(true));
-                if (!email || !password) {
+
+                if (!email || !password || !authValidators.validateEmail(email) || !authValidators.validatePassword(password)) {
                     dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
                 const response = await votifyServer.post('/login', { email, password });

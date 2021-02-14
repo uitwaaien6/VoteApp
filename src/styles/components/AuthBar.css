@@ -1,0 +1,58 @@
+
+.auth-bar__container {
+    border: 1px solid black;
+    width: 25%;
+}
+
+.auth-bar__content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.auth-bar__items {
+    padding: 2rem;
+    position: relative;
+    left: 20%;
+    transition: all 0.2s ease-in-out;
+}
+
+.auth-bar__items > ul {
+    list-style: none;
+}
+
+.auth-bar__items > ul > li {
+    
+    font-size: 2rem;
+    padding: 1rem 0rem;
+    border-bottom: 1px solid black;
+}
+
+.auth-bar__items > ul > li > a {
+    text-decoration: none;
+    color: rgb(180, 92, 33);
+}
+
+#auth-bar__hamburger {
+    position: relative;
+    cursor: pointer;
+    font-size: 3rem;
+    display: none;
+
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 900px) {
+
+    .auth-bar__container {
+        width: 70%;
+
+    }
+
+    #auth-bar__hamburger {
+        display: block;
+        left: 10%;
+    }
+
+    
+}

@@ -25,6 +25,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    line-height: 1.1em;
     padding: 5rem;
     color: white;
 }

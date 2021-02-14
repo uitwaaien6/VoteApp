@@ -10,7 +10,7 @@ class Votes extends React.Component {
     }
 
     componentDidMount() {
-
+        
     }
 
     render() {
