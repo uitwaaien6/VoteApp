@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 // REACT ICONS
 import { GiHamburgerMenu } from 'react-icons/gi';
 
+// CONFIG > ROLES
+import roles from '../_config/roles';
+
 // CSS
 import '../styles/components/AuthBar.css';
 
@@ -23,33 +26,52 @@ class AuthBar extends React.Component {
         this.handleResize = this.handleResize.bind(this);
     }
 
-    renderHamburgerIcon(isAuthBarOpen) {
-        if (!isAuthBarOpen) {
-            return (
-                <GiHamburgerMenu
-                    onClick={() => {
+    renderHamburgerIcon() {
+        return (
+            <GiHamburgerMenu
+                onClick={() => {
 
-                        this.setState({ ...this.state, isAuthBarOpen: !this.state.isAuthBarOpen });
+                    this.setState({ ...this.state, isAuthBarOpen: !this.state.isAuthBarOpen });
 
-                        if (this.authBarItems.current && window.innerWidth < 900) {
+                    if (this.authBarItems.current && window.innerWidth < 900) {
 
-                            if (this.state.isAuthBarOpen) {
-                                return this.authBarItems.current.style.left = '20%';
-                            }
-
-                            return this.authBarItems.current.style.left = '-100%';
-                            
+                        if (this.state.isAuthBarOpen) {
+                            return this.authBarItems.current.style.left = '20%';
                         }
+
+                        return this.authBarItems.current.style.left = '-150%';
                         
-                    }}
-                    id="auth-bar__hamburger"
-                />
-            );
-        };
+                    }
+                    
+                }}
+                id="auth-bar__hamburger"
+            />
+        );
     }
 
-    renderBarItems(isLoggedIn, isAuthBarOpen) {
-        if (true) {
+    renderBarItems(isLoggedIn) {
+        if (isLoggedIn) {
+
+            const userRole = this.props.user.role;
+            
+            const barItems = [
+                {
+                    title: 'Profile',
+                    uri: '/profile',
+                    role: 'user'
+                },
+                {
+                    title: 'Votes',
+                    uri: '/votes',
+                    role: 'user'
+                },
+                {
+                    title: 'Start Vote',
+                    uri: '/start-vote',
+                    role: 'admin'
+                }
+            ];
+
             return (
                 <div 
                     className="auth-bar__items"
@@ -57,17 +79,23 @@ class AuthBar extends React.Component {
                 >
                     <ul>
 
-                        <Link to="/votes">
-                            <li>Votes</li>
-                        </Link>
+                        {barItems.map((item ,index) => {
+                            const role = item.role;
+                        
+                            if (role === roles.ADMIN && userRole !== roles.ADMIN) {
+                                return;
+                            }
 
-                        <Link to="/profile">
-                            <li>Profile</li>
-                        </Link>
-
-                        <Link to="/votes">
-                            <li> Votes</li>
-                        </Link>
+                            return (
+                                <Link 
+                                    to={item.uri}
+                                    key={index}
+                                >
+                                    <li>{item.title}</li>
+                                </Link>
+                            );
+                            
+                        })}
 
                     </ul>
                 </div>
@@ -96,11 +124,13 @@ class AuthBar extends React.Component {
     }
 
     render() {
+
+        // TODO Replace true with real isLoggedIn
         return (
             <div className="auth-bar__container">
                 <div className="auth-bar__content">
-                    {this.renderHamburgerIcon(false)}
-                    {this.renderBarItems(null, this.state.isAuthBarOpen)}
+                    {this.renderHamburgerIcon()}
+                    {this.renderBarItems(true)}
                 </div>
             </div>
         );

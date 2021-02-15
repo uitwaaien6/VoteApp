@@ -1,8 +1,35 @@
-.home__container {
 
-}
 
 .home__content {
+    display: flex;
+    align-items: center;
+    justify-content: right;
     padding: 3rem 0rem 15rem 0rem;
     background-color: rgb(180, 92, 33);
 }       
+
+.home__main-page {
+    text-align: center;
+    padding-left: 22%;
+    position: relative;
+}
+
+.home__main-page > h1 {
+    color: white;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 900px) {
+
+    .home__content {
+        display: block;
+    }  
+
+    .home__main-page {
+        text-align: center;
+        padding: 0;
+        
+    }
+    
+    
+}

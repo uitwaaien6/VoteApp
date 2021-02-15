@@ -16,6 +16,13 @@ class Home extends React.Component {
         this.state = {}
     }
 
+    renderMainPage() {
+        return (
+            <div className="home__main-page">
+                <h1>Welcome to Votify.</h1>
+            </div>
+        );
+    }
 
     componentDidMount() {
 
@@ -25,7 +32,9 @@ class Home extends React.Component {
         return (
             <div className="home__container">
                 <div className="home__content">
+
                     <AuthBar />
+                    {this.renderMainPage()}
                 </div>
             </div>
         );

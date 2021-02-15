@@ -2,13 +2,16 @@
 // TYPES
 import types from '../actions/types';
 
+// CONFIG > ROLES
+import roles from '../_config/roles';
+
 // initial values
 const initialValue = {
     user: {
-        role: null,
-        emailVerified: null,
-        email: '',
-        userName: ''
+        role: 'admin',
+        emailVerified: true,
+        email: 'ruzgarata6@gmail.com',
+        userName: 'uitwaaien'
     },
     isLoggedIn: false,
     loading: false,

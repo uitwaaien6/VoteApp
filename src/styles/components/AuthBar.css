@@ -1,7 +1,7 @@
 
 .auth-bar__container {
-    width: 25%;
-
+    width: 20%;
+    z-index: 2;
 }
 
 .auth-bar__content {
@@ -16,7 +16,7 @@
     position: relative;
     transition: all 0.2s ease-in-out;
     background-color: white;
-    box-shadow: 1px 1px 30px black;
+    box-shadow: 1px 1px 20px black;
 
 }
 
@@ -27,7 +27,7 @@
 
 .auth-bar__items > ul li {
     padding: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-bottom: 1px solid black;
     width: 100%;
     transition: all 0.2s ease-out;
@@ -60,7 +60,7 @@
     }
 
     .auth-bar__items {
-        width: 80%;
+        width: 100%;
         left: 20%;
     }
 
