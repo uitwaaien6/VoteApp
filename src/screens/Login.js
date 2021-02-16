@@ -22,8 +22,7 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        this.props.checkAuthStatus();
-        console.log(this.props);
+        //this.props.checkAuthStatus();
     }
 
     render() {

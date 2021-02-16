@@ -83,7 +83,7 @@ class AuthBar extends React.Component {
                             const role = item.role;
                         
                             if (role === roles.ADMIN && userRole !== roles.ADMIN) {
-                                return;
+                                return null;
                             }
 
                             return (

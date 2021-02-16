@@ -164,12 +164,13 @@ function mapDispatchToProps(dispatch) {
                 const response = await votifyServer.get('/logout');
                 const { data } = response;
                 if (data.success) {
+                    console.log('Success logging out')
                     dispatch(actions.logOut({ authInfo: data.msg }));
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: error.message }));
                 dispatch(actions.loading(false));
+                dispatch(actions.logOut({ authInfo: 'Successfully logged out.' }));
             }
 
             dispatch(actions.loading(false));

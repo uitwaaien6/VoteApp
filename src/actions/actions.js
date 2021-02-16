@@ -4,6 +4,7 @@
 import types from './types';
 
 function logIn(payload) {
+    console.log(payload);
     return {
         type: types.LOG_IN,
         payload

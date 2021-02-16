@@ -86,7 +86,7 @@ class AuthForm extends React.Component {
                             onClick={(event) => {
 
                                 if (this.state.isForgetPassword) {
-                                    this.props.passwordReset({ email: this.state.recoveryEmail });
+                                    this.props.sendPasswordResetLink({ email: this.state.recoveryEmail });
                                 }
 
                                 this.setState({ ...this.state, isForgetPassword: true });
@@ -257,6 +257,7 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.loading(true));
 
                 if (!email || !password || !authValidators.validateEmail(email) || !authValidators.validatePassword(password)) {
+                    console.log('password is invalid');
                     dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
                 const response = await votifyServer.post('/login', { email, password });
@@ -300,11 +301,12 @@ function mapDispatchToProps(dispatch, ownProps) {
             dispatch(actions.loading(false));
 
         },
-        passwordReset: async ({ email }) => {
+        sendPasswordResetLink: async ({ email }) => {
             try {
                 dispatch(actions.loading(true));
                 if (!email) {
-                    dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
+                    dispatch(actions.loading(false));
+                    return dispatch(actions.authInfo({ authInfo: 'Please enter a valid email' }));
                 }
 
                 const response = await votifyServer.post('/password-reset/send-link', { email });

@@ -1,6 +1,10 @@
 
 // NODE MODULES
 import React from 'react';
+import { connect } from 'react-redux';
+
+// COMPONENTS
+import AuthBar from '../components/AuthBar';
 
 class Votes extends React.Component {
 
@@ -9,6 +13,7 @@ class Votes extends React.Component {
         this.state = {}
     }
 
+    
     componentDidMount() {
         
     }
@@ -17,11 +22,24 @@ class Votes extends React.Component {
         return (
             <div className="votes__container">
                 <div className="votes__content">
-                    
+                    <AuthBar />
                 </div>
             </div>
         );
     };
 }
 
-export default Votes;
+function mapStateToProps(state) {
+    return {
+        isLoggedIn: state.auth.isLoggedIn,
+        user: state.auth.user
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Votes);

@@ -22,7 +22,6 @@ export default function checkAuthStatus(dispatch, ownProps) {
             }
 
             dispatch(actions.logOut({ authInfo: 'Successfully logged out.' }));
-            ownProps.history.push('/login');
 
         } catch (error) {
 

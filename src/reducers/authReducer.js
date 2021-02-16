@@ -3,15 +3,15 @@
 import types from '../actions/types';
 
 // CONFIG > ROLES
-import roles from '../_config/roles';
+// import roles from '../_config/roles';
 
 // initial values
 const initialValue = {
     user: {
-        role: 'admin',
-        emailVerified: true,
-        email: 'ruzgarata6@gmail.com',
-        userName: 'uitwaaien'
+        role: '',
+        emailVerified: null,
+        email: '',
+        userName: ''
     },
     isLoggedIn: false,
     loading: false,
@@ -25,10 +25,7 @@ export default function authReducer(state = initialValue, action) {
             return { 
                 ...state, 
                 user: { 
-                    role: action.payload.role,
-                    emailVerified: action.payload.emailVerified,
-                    email: action.payload.email,
-                    userName: action.payload.userName
+                    ...action.payload.user
                 }, 
                 isLoggedIn: action.payload.success, 
                 authInfo: action.payload.msg  
@@ -37,6 +34,13 @@ export default function authReducer(state = initialValue, action) {
         case types.REGISTER:
             return {
                 ...state,
+                user: { 
+                    role: '',
+                    emailVerified: null,
+                    email: '',
+                    userName: ''
+                },
+                isLoggedIn: false,
                 authInfo: action.payload.message
             }
 
