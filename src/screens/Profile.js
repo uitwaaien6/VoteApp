@@ -18,7 +18,7 @@ import actions from '../actions/actions';
 import '../styles/screens/Profile.css';
 
 // IMAGES
-import authSculp_gif from '../images/sculp_unauthorized.gif';
+import sculpGif from '../images/sculp_unauthorized.gif';
 
 class Profile extends React.Component {
 
@@ -42,7 +42,9 @@ class Profile extends React.Component {
             }
         }
 
-        return normalizedWord[0].toUpperCase() + normalizedWord.substr(1, normalizedWord.length);
+        normalizedWord = normalizedWord[0].toUpperCase() + normalizedWord.substr(1, normalizedWord.length);
+
+        return normalizedWord;
     }
 
     renderProfile() {
@@ -102,7 +104,7 @@ class Profile extends React.Component {
             return (
                 <div className="profile__unauthorized">
                     <iframe
-                        src={authSculp_gif}
+                        src={sculpGif}
                         frameBorder="0"
                     />
 
@@ -159,6 +161,9 @@ function mapDispatchToProps(dispatch, ownProps) {
                     dispatch(actions.loading(false));
                     return console.log('email doesnt exist');
                 }
+
+                await votifyServer.get('/check-auth-status');
+
                 const response = await votifyServer.post('/password-reset/send-link', { email });
     
                 const { data } = response;
@@ -170,8 +175,9 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.loading(false));
     
             } catch (error) {
-                dispatch(actions.loading(false));
-                dispatch(actions.authInfo({ authInfo: 'Something went wrong while sending password reset link' }));
+                ownProps.history.push('/login');
+                dispatch(actions.logOut());
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
             }
             dispatch(actions.loading(false));
         },
@@ -184,6 +190,8 @@ function mapDispatchToProps(dispatch, ownProps) {
                     return console.log('email is not provided');
                 }
 
+                await votifyServer.get('/check-auth-status');
+
                 const response = await votifyServer.post('/email-reset/send-link', { email });
                 
                 const { data } = response;
@@ -194,8 +202,9 @@ function mapDispatchToProps(dispatch, ownProps) {
 
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.loading(false));
-                dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+                ownProps.history.push('/login');
+                dispatch(actions.logOut());
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
             }
 
             dispatch(actions.loading(false));

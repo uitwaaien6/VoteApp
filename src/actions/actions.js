@@ -4,7 +4,6 @@
 import types from './types';
 
 function logIn(payload) {
-    console.log(payload);
     return {
         type: types.LOG_IN,
         payload
@@ -32,11 +31,27 @@ function loading(payload) {
     }
 }
 
+function getVotes(payload) {
+    return {
+        type: types.GET_VOTES,
+        payload
+    };
+}
+
+function warningPopUp(payload) {
+    return {
+        type: types.WARNING_POPUP,
+        payload
+    }
+}
+
 const actions = {
     logIn,
     logOut,
     authInfo,
-    loading
+    loading,
+    getVotes,
+    warningPopUp
 }
 
 export default actions;

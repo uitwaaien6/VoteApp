@@ -1,5 +1,4 @@
 .profile__content {
-
     display: flex;
     align-items: center;
     justify-content: left;
@@ -22,7 +21,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(180, 92, 33);
     padding-top: 6rem;  
     width: 100%;
 }

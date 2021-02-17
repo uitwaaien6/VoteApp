@@ -273,7 +273,7 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.loading(false));
 
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: 'Something went wrong.' }));
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
                 dispatch(actions.loading(false));
             }
 
@@ -294,7 +294,7 @@ function mapDispatchToProps(dispatch, ownProps) {
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
                 dispatch(actions.loading(false));
             }
 
@@ -316,23 +316,15 @@ function mapDispatchToProps(dispatch, ownProps) {
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: 'Error sending password reset link' }));
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
                 dispatch(actions.loading(false));
             }
 
             dispatch(actions.loading(false));
         },
         clearAuthInfo: () => {
-
-            try {
-                
-                dispatch(actions.authInfo({ authInfo: null }));
-            } catch (error) {
-                dispatch(actions.loading(false));
-            }
-
-            dispatch(actions.loading(false));
-
+            dispatch(actions.loading(false));   
+            dispatch(actions.authInfo({ authInfo: null }));
         }
     };
 }

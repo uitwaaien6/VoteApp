@@ -15,7 +15,8 @@ const initialValue = {
     },
     isLoggedIn: false,
     loading: false,
-    authInfo: null
+    authInfo: null,
+    warningPopUp: false
 }
 
 export default function authReducer(state = initialValue, action) {
@@ -54,7 +55,7 @@ export default function authReducer(state = initialValue, action) {
                     userName: ''
                  },
                 isLoggedIn: false,
-                authInfo: action.payload.authInfo
+                authInfo: action.payload ? action.payload.authInfo : 'Successfully logged out'
             }
             
         case types.AUTH_INFO:
@@ -68,6 +69,12 @@ export default function authReducer(state = initialValue, action) {
                 ...state,
                 loading: action.payload
             };
+
+        case types.WARNING_POPUP:
+            return {
+                ...state,
+                warningPopUp: action.payload
+            }
 
         default:
             return state;

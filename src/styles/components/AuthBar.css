@@ -1,7 +1,6 @@
 
 .auth-bar__container {
     width: 20%;
-    z-index: 2;
 }
 
 .auth-bar__content {
@@ -17,7 +16,7 @@
     transition: all 0.2s ease-in-out;
     background-color: white;
     box-shadow: 1px 1px 20px black;
-
+    z-index: 1;
 }
 
 .auth-bar__items > ul {
