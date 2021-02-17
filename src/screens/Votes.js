@@ -15,6 +15,7 @@ import actions from '../actions/actions';
 
 // API
 import votifyServer from '../api/votifyServer';
+import checkAuthStatus from '../api/checkAuthStatus';
 
 // CSS
 import '../styles/screens/Votes.css';
@@ -29,12 +30,22 @@ class Votes extends React.Component {
         this.state = {}
 
         this.renderVoteElements = this.renderVoteElements.bind(this);
-        this.onVoteDelete = this.onVoteDelete.bind(this);
+        this.onTrashCanClick = this.onTrashCanClick.bind(this);
     }
 
-    onVoteDelete() {
-        console.log(this.props);
-        this.props.setWarningPopUp(true);
+    async onVoteDelete(voteClientId) {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
+    onTrashCanClick() {
+        return () => {
+            this.props.setWarningPopUp(true);
+        }
+
     }
 
     renderVoteElements(votes) {
@@ -45,17 +56,17 @@ class Votes extends React.Component {
         return votes.map((vote, index) => {
             return (
                 <li>
+
                     <Link
                         to={`/votes/${vote.clientId}`}
                     >
                         <div>
-                            {vote.title} 
+                            {vote.title}
                         </div>
                     </Link>
 
-
                     <div>
-                        {isAdmin ? <div onClick={this.onVoteDelete} id="votes__trash-container"><FaTrashAlt id="votes__trash" /> </div> : null}
+                        {isAdmin ? <div onClick={this.onTrashCanClick} id="votes__trash-container"><FaTrashAlt id="votes__trash" /> </div> : null}
                     </div>
                     
                 </li>
@@ -89,12 +100,14 @@ class Votes extends React.Component {
 
         const configuration = {
             title: 'Do you want to delete this vote ?',
-            callback: () => this.onVoteDelete()
+            callback: () => console.log('deleting vote')
         }
 
         return (
             <>
-                <WarningPopUp  configuration={configuration} />
+                <WarningPopUp
+                    configuration={configuration}
+                />
                 <AuthBar />
                 {this.renderVotes(this.props.votes)}
             </>
@@ -103,6 +116,7 @@ class Votes extends React.Component {
 
     componentDidMount() {
         this.props.getVotes();
+        this.props.checkAuthStatus();
     }
 
     render() {
@@ -110,7 +124,7 @@ class Votes extends React.Component {
             <div className="votes__container">
                 <div className="votes__content">
                     
-                    {this.configVotesPage(true)}
+                    {this.configVotesPage(this.props.isLoggedIn)}
                 </div>
             </div>
         );
@@ -154,7 +168,8 @@ function mapDispatchToProps(dispatch, ownProps) {
             } catch (error) {
                 
             }
-        }
+        },
+        checkAuthStatus: checkAuthStatus(dispatch, ownProps)
     }
 }
 

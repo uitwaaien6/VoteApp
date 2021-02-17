@@ -130,7 +130,7 @@ class AuthBar extends React.Component {
             <div className="auth-bar__container">
                 <div className="auth-bar__content">
                     {this.renderHamburgerIcon()}
-                    {this.renderBarItems(true)}
+                    {this.renderBarItems(this.props.isLoggedIn)}
                 </div>
             </div>
         );

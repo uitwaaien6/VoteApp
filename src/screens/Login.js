@@ -21,8 +21,22 @@ class Login extends React.Component {
 
     }
 
+    configPage(isLoggedIn) {
+        if (isLoggedIn) {
+            return this.props.history.push('/profile');
+        }
+
+        return (
+            <>
+                <AuthForm  
+                    history={this.props.history} // we pass the history object which comes from the router component
+                />
+            </>
+        );
+    }
+
     componentDidMount() {
-        //this.props.checkAuthStatus();
+        this.props.checkAuthStatus();
     }
 
     render() {
@@ -30,9 +44,7 @@ class Login extends React.Component {
         return (
             <div className="login__container">
                 <div className="login__content">
-                    <AuthForm  
-                        history={this.props.history} // we pass the history object which comes from the router component
-                    />
+                    {this.configPage(this.props.isLoggedIn)}
                 </div>
             </div>
         );
@@ -42,6 +54,7 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.auth.user,
+        isLoggedIn: state.auth.isLoggedIn,
         loading: state.auth.loading
     }
 }

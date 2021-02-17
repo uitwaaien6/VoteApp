@@ -35,7 +35,10 @@ class WarningPopUp extends React.Component {
 
                 <div>
                     <button
-                        onClick={callback} 
+                        onClick={(event) => {
+                            callback();
+                            console.log(event);
+                        }}
                     >
                         Yes
                     </button>
@@ -52,11 +55,10 @@ class WarningPopUp extends React.Component {
     }
 
     componentDidMount() {
-        
+
     }
 
     render() {
-        console.log(this.props.warningPopUp)
         return (
             <div
                 className="warning-popup__container"
