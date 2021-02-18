@@ -10,6 +10,7 @@ import Votes from '../screens/Votes';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Profile from '../screens/Profile';
+import StartVote from '../screens/StartVote';
 
 // COMPONENTS
 import Header from './Header';
@@ -49,6 +50,7 @@ class App extends React.Component {
                                 <Route path="/register" exact component={Register} />
                                 <Route path="/profile" exact component={Profile} />
                                 <Route path="/votes" exact component={Votes} />
+                                <Route path="/start-vote" exact component={StartVote} />
                             </Switch>
                             <Footer />
 

@@ -27,22 +27,23 @@ class Votes extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            vote: {}
+        }
 
         this.renderVoteElements = this.renderVoteElements.bind(this);
         this.onTrashCanClick = this.onTrashCanClick.bind(this);
+        this.onVoteDelete = this.onVoteDelete.bind(this);
     }
 
-    async onVoteDelete(voteClientId) {
-        try {
-            
-        } catch (error) {
-            
-        }
+    // we pass that binded function to the warningPopUp configuration object, when we rerender that component, the specific vote informations is being passed to warninPopUp component as configuration props.
+    onVoteDelete() {
+        this.props.deleteVote(this.state.vote.clientId);
     }
 
-    onTrashCanClick() {
+    onTrashCanClick(vote) {
         return () => {
+            this.setState({ ...this.state, vote });
             this.props.setWarningPopUp(true);
         }
 
@@ -66,7 +67,7 @@ class Votes extends React.Component {
                     </Link>
 
                     <div>
-                        {isAdmin ? <div onClick={this.onTrashCanClick} id="votes__trash-container"><FaTrashAlt id="votes__trash" /> </div> : null}
+                        {isAdmin ? <div onClick={this.onTrashCanClick(vote)} id="votes__trash-container"><FaTrashAlt id="votes__trash" /> </div> : null}
                     </div>
                     
                 </li>
@@ -89,18 +90,20 @@ class Votes extends React.Component {
             return (
                 <div className="votes__unauthorized">
                     <iframe
+                        title="sculpGif"
                         src={sculpGif}
                         frameBorder="0"
                     />
 
-                    <p>You are not logged in.</p>
+                    <p>You are logged out.</p>
                 </div>
             );
         }
 
         const configuration = {
             title: 'Do you want to delete this vote ?',
-            callback: () => console.log('deleting vote')
+            vote: this.state.vote,
+            callback: this.onVoteDelete
         }
 
         return (
@@ -168,6 +171,26 @@ function mapDispatchToProps(dispatch, ownProps) {
             } catch (error) {
                 
             }
+        },
+        deleteVote: async (voteClientId) => {
+            try {
+                dispatch(actions.loading(true));
+                const { data} = await votifyServer.post('/delete-vote', { voteClientId });
+                if (!data.success) {
+                    dispatch(actions.loading(false));
+                    return dispatch(actions.authInfo({ authInfo: 'not success while deleting vote' }));
+                }
+
+                dispatch(actions.getVotes(data.votes));
+                dispatch(actions.warningPopUp(false));
+                dispatch(actions.authInfo({ authInfo: data.msg }));
+
+    
+            } catch (error) {
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
+            }
+
+            dispatch(actions.loading(false));
         },
         checkAuthStatus: checkAuthStatus(dispatch, ownProps)
     }

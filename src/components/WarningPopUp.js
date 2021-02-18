@@ -35,10 +35,7 @@ class WarningPopUp extends React.Component {
 
                 <div>
                     <button
-                        onClick={(event) => {
-                            callback();
-                            console.log(event);
-                        }}
+                        onClick={callback}
                     >
                         Yes
                     </button>

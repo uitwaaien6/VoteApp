@@ -1,0 +1,85 @@
+
+.start-vote__content {
+    padding: 3rem 0rem 15rem 0rem;
+    background-color: rgb(180, 92, 33);
+}
+
+.start-vote__unauthorized {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6rem;  
+    width: 100%;
+}
+
+.start-vote__unauthorized > iframe {
+    width: 384px;
+    height: 283px;
+}
+
+.start-vote__unauthorized > p {
+    font-size: 2rem;
+    color: white;
+    padding-top: 4rem;
+}
+
+.start-vote__config {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-vote__config > .start-vote__options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-vote__config > div {
+    margin: 0.6rem;
+}
+
+.start-vote__info {
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.7rem;
+    font-size: 1.2rem;
+    color: yellow;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.start-vote__config > div input {
+    border-radius: 0.5rem;
+    padding: 0.6rem;
+    font-size: 1.2rem;
+    color: white;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.start-vote__config > div button {
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.7rem;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.start-vote__config > .start-vote__options > div {
+    margin: 0.6rem;
+}
+
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 900px) {
+
+    
+}

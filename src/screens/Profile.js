@@ -2,7 +2,6 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
-import chalk from 'chalk';
 
 // COMPONENTS
 import AuthBar from '../components/AuthBar';
@@ -104,11 +103,12 @@ class Profile extends React.Component {
             return (
                 <div className="profile__unauthorized">
                     <iframe
+                        title="sculpGif"
                         src={sculpGif}
                         frameBorder="0"
                     />
 
-                    <p>You are not logged in.</p>
+                    <p>You are logged out.</p>
                 </div>
             );
         }
