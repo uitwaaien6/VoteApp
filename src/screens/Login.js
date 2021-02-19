@@ -11,7 +11,7 @@ import AuthForm from '../components/AuthForm';
 import checkAuthStatus from '../api/checkAuthStatus';
 
 // ACTIONS
-// import actions from '../actions/actions';
+import actions from '../actions/actions';
 
 class Login extends React.Component {
 
@@ -37,6 +37,7 @@ class Login extends React.Component {
 
     componentDidMount() {
         this.props.checkAuthStatus();
+        this.props.clearAuthInfo();
     }
 
     render() {
@@ -61,7 +62,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        checkAuthStatus: checkAuthStatus(dispatch, ownProps)
+        checkAuthStatus: checkAuthStatus(dispatch, ownProps),
+        clearAuthInfo: () => {
+            dispatch(actions.authInfo({ authInfo: '' }));
+        }
     }
 }
 

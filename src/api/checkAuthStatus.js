@@ -16,14 +16,13 @@ export default function checkAuthStatus(dispatch, ownProps) {
 
             if (data.success) {
                 dispatch(actions.logIn(data));
-                //ownProps.history.push('/profile');
                 return null;
             }
 
             dispatch(actions.logOut({ authInfo: 'Successfully logged out.' }));
 
         } catch (error) {
-            
+            //dispatch(actions.logOut({ authInfo: 'Successfully logged out.' }));
         }
 
     }

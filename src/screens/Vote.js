@@ -3,6 +3,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// API
+import checkAuthStatus from '../api/checkAuthStatus';
+
+// CSS
+import '../styles/screens/Vote.css';
+
 class Vote extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +16,7 @@ class Vote extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.checkAuthStatus();
     }
 
     render() {
@@ -24,6 +30,19 @@ class Vote extends React.Component {
     };
 }
 
+function mapStateToProps(state) {
+    return {
+        isLoggedIn: state.auth.isLoggedIn,
+        user: state.auth.user
+    }
+}
 
-export default Vote;
+function mapDispatchToProps(dispatch) {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+
 

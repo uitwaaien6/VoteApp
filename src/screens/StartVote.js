@@ -3,6 +3,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import AuthBar from '../components/AuthBar';
+
 // API
 import checkAuthStatus from '../api/checkAuthStatus';
 import votifyServer from '../api/votifyServer';
@@ -138,6 +141,7 @@ class StartVote extends React.Component {
         return (
             <div className="start-vote__container">
                 <div className="start-vote__content">
+                    <AuthBar />
                     {this.configPage(this.props.isLoggedIn, this.props.user.role)}
                 </div>
             </div>
@@ -174,7 +178,7 @@ function mapDispatchToProps(dispatch, ownProps) {
                 const configedOptions = [];
         
                 optionValues.forEach((item, index) => {
-                    if (item && !item.includes(' ')) {
+                    if (item) {
                         configedOptions.push(item);
                     }
                 });

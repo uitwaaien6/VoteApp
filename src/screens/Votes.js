@@ -156,7 +156,7 @@ function mapDispatchToProps(dispatch, ownProps) {
                 }
 
                 dispatch(actions.getVotes(data.votes));
-
+                console.log(data.votes);
 
             } catch (error) {
 
@@ -185,7 +185,6 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.warningPopUp(false));
                 dispatch(actions.authInfo({ authInfo: data.msg }));
 
-    
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: error.response.data.error }));
             }
