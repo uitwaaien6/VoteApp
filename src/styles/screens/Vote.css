@@ -43,8 +43,10 @@
 }
 
 .vote__vote h1 {
-
-    padding: 2rem 0rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    margin: 2rem 0rem;
     color: white;
 }
 
@@ -66,4 +68,18 @@
 
 #vote-value {
     color: yellow;
+}
+
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 900px) {
+
+    .vote__info {
+        padding: 0.6rem 0.5rem;
+    }
+    
+    .vote__vote h1 {
+        padding: 1rem 1rem;
+    }
+    
 }

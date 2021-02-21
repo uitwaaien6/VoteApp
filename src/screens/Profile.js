@@ -118,9 +118,13 @@ class Profile extends React.Component {
                 <AuthBar />
 
                 {this.renderProfile(true)}
-                <p>
-                    {this.props.authInfo ? this.props.authInfo : null}
-                </p>
+                
+                <div className="profile__info">
+                    <p>
+                        {this.props.authInfo ? this.props.authInfo : null}
+                    </p>
+                </div>
+
                 {this.renderAuthButtons(true)}
             </>
         );

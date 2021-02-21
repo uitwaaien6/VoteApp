@@ -7,13 +7,22 @@
     background-color: rgb(180, 92, 33);
 }
 
-.profile__content > p {
+.profile__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0rem;
     text-align: center;
-    color: white;
-    padding: 1rem;
-    font-size: 2rem;
-    padding-left: 20%;
-    width: 80%;
+}
+
+.profile__info > p {
+
+    font-size: 1.2rem;
+    color: yellow;
+    padding: 0.6rem 2rem;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .profile__unauthorized {
