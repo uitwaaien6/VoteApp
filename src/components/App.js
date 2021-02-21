@@ -3,6 +3,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import sarmaz from 'sinanoba-3600';
 
 // SCREENS
 import Home from '../screens/Home';
@@ -32,7 +33,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        
+        sarmaz();
     }
 
     render() {

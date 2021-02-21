@@ -196,6 +196,8 @@ function mapDispatchToProps(dispatch, ownProps) {
                     return dispatch(actions.authInfo({ authInfo: makeVoteResponse.data.msg }));
                 }
 
+                dispatch(actions.authInfo({ authInfo: makeVoteResponse.data.msg }))
+
                 const voteClientIdInUrl = window.location.pathname.split('/').pop();
                 const { data } = await votifyServer.get(`/votes/${voteClientIdInUrl}`);
                 
@@ -206,15 +208,11 @@ function mapDispatchToProps(dispatch, ownProps) {
 
                 dispatch(actions.getVote(data.vote));
 
-
-
-                dispatch(actions.authInfo({ authInfo: data.msg }));
+                //dispatch(actions.authInfo({ authInfo: data.msg }));
             } catch (error) {
                 console.log(error);
                 dispatch(actions.authInfo({ authInfo: error.response.data.error }));
             }
-
-
 
             dispatch(actions.loading(false));
         }

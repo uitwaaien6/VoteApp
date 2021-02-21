@@ -1,8 +1,5 @@
-"use strict";
-
 // NODE MODULES
 const chalk = require('chalk');
-
 
 // REPRESENTATIONAL DATABASE ENCRYPTION CLASS
 class RDE {
@@ -220,7 +217,7 @@ class RDE {
     
                 console.log(chalk.red(` ~ keyObject is empty in decrypt...`));
                 console.log(chalk.red(` ~ Returning null...`));
-                return null
+                return null;
             }
     
             const sectionProperties = Object.getOwnPropertyNames(keyObject[keyObjectProperties[0]]);

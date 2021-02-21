@@ -13,6 +13,8 @@ class WarningPopUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this.warningPopUp = React.createRef();
     }
 
     configPopup(configuration, warningPopUp) {
@@ -28,7 +30,10 @@ class WarningPopUp extends React.Component {
         const { title, callback } = configuration;
 
         return (
-            <div className="warning-popup__window">
+            <div
+                className="warning-popup__window"
+                ref={this.warningPopUp}
+            >
                 <div>
                     <h1>{title}</h1>
                 </div>
@@ -52,7 +57,11 @@ class WarningPopUp extends React.Component {
     }
 
     componentDidMount() {
-
+        window.addEventListener('scroll', () => {
+            if (this.warningPopUp.current) {
+                this.warningPopUp.current.style.top = `${window.pageYOffset}px`;
+            }
+        });
     }
 
     render() {
