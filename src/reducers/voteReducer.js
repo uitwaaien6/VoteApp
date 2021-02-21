@@ -8,7 +8,8 @@ import types from '../actions/types';
 // initial values
 const initialValue = {
     votesInfo: null,
-    votes: []
+    votes: [],
+    vote: null
 }
 
 export default function voteReducer(state = initialValue, action) {
@@ -16,6 +17,9 @@ export default function voteReducer(state = initialValue, action) {
 
         case types.GET_VOTES:
             return { ...state, votes: [...action.payload] };
+        
+        case types.GET_VOTE:
+            return { ...state, vote: action.payload };
 
         default:
             return state;

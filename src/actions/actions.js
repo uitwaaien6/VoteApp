@@ -38,6 +38,13 @@ function getVotes(payload) {
     };
 }
 
+function getVote(payload) {
+    return {
+        type: types.GET_VOTE,
+        payload
+    }
+}
+
 function warningPopUp(payload) {
     return {
         type: types.WARNING_POPUP,
@@ -51,6 +58,7 @@ const actions = {
     authInfo,
     loading,
     getVotes,
+    getVote,
     warningPopUp
 }
 

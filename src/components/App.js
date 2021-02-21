@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // SCREENS
 import Home from '../screens/Home';
 import Votes from '../screens/Votes';
+import Vote from '../screens/Vote';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Profile from '../screens/Profile';
@@ -49,6 +50,7 @@ class App extends React.Component {
                                 <Route path="/login" exact component={Login} />
                                 <Route path="/register" exact component={Register} />
                                 <Route path="/profile" exact component={Profile} />
+                                <Route path="/votes/:voteId" exact component={Vote} />
                                 <Route path="/votes" exact component={Votes} />
                                 <Route path="/start-vote" exact component={StartVote} />
                             </Switch>

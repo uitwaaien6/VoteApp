@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 // ACTIONS
 import actions from '../actions/actions';
 
+// ENCRYPTION
+import RDE from '../encryption/representationalDatabaseEncryption';
+
 // API
 import votifyServer from '../api/votifyServer';
 // import checkAuthStatus from '../api/checkAuthStatus'; // dispatch function
@@ -260,7 +263,12 @@ function mapDispatchToProps(dispatch, ownProps) {
                     console.log('password is invalid');
                     dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
-                const response = await votifyServer.post('/login', { email, password });
+
+                const rdeKey = RDE.createKey(password);
+
+                const encryptedPassword = RDE.encrypt(password, rdeKey);
+
+                const response = await votifyServer.post('/login', { email, encryptedPassword, rdeKey });
                 const { data } = response;
                 if (data.success) {
                     dispatch(actions.logIn(data));

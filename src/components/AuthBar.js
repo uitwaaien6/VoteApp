@@ -69,6 +69,11 @@ class AuthBar extends React.Component {
                     title: 'Start Vote',
                     uri: '/start-vote',
                     role: 'admin'
+                },
+                {
+                    title: 'Register Voter',
+                    uri: '/register-executive',
+                    role: 'admin'
                 }
             ];
 
