@@ -14,6 +14,8 @@ class Loading extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
+        
+        this.loading = React.createRef();
 
         this.renderLoadingIcon = this.renderLoadingIcon.bind(this);
     }
@@ -21,7 +23,10 @@ class Loading extends React.Component {
     renderLoadingIcon(loading) {
         if (loading) {
             return (
-                <div className="loading__icon">
+                <div 
+                    className="loading__icon"
+                    ref={this.loading}
+                >
                     <VscLoading
                         id="loading__icon"
                     />
@@ -33,7 +38,14 @@ class Loading extends React.Component {
     }
 
     componentDidMount() {
-
+        window.addEventListener('scroll', () => {
+            if (this.loading.current) {
+                this.loading.current.style.top = `${window.pageYOffset}px`;
+            }
+        });
+        if (this.loading.current) {
+            this.loading.current.style.top = `${window.pageYOffset}px`;
+        }
     }
 
     render() {

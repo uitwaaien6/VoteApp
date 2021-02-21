@@ -3,7 +3,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import sarmaz from 'sinanoba-3600';
 
 // SCREENS
 import Home from '../screens/Home';
@@ -13,6 +12,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Profile from '../screens/Profile';
 import StartVote from '../screens/StartVote';
+import RegisterExecutive from '../screens/RegisterExecutive';
 
 // COMPONENTS
 import Header from './Header';
@@ -33,7 +33,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        sarmaz();
+
     }
 
     render() {
@@ -54,6 +54,7 @@ class App extends React.Component {
                                 <Route path="/votes/:voteId" exact component={Vote} />
                                 <Route path="/votes" exact component={Votes} />
                                 <Route path="/start-vote" exact component={StartVote} />
+                                <Route path="/register-executive" exact component={RegisterExecutive} />
                             </Switch>
                             <Footer />
 
