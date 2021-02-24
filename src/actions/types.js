@@ -2,6 +2,7 @@
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 const GET_USERS = 'GET_USERS';
+const GET_USER = 'GET_USER';
 const AUTH_INFO = 'AUTH_INFO';
 const LOADING = 'LOADING';
 
@@ -14,6 +15,7 @@ const types = {
     LOG_IN,
     LOG_OUT,
     GET_USERS,
+    GET_USER,
     AUTH_INFO,
     LOADING,
     GET_VOTES,

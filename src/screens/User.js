@@ -35,13 +35,14 @@ class User extends React.Component {
         this.activeSelect = React.createRef();
         this.roleSelect = React.createRef();
 
-        this.findUser = this.findUser.bind(this);
+        this.onUserSaveClick = this.onUserSaveClick.bind(this);
+        this.onUserSave = this.onUserSave.bind(this);
     }
 
     onUserSave() {
-        const activeVal = this.activeSelect.current.value;
-        const roleVal = this.roleSelect.current.value;
-        this.props.saveUser()
+        const active = this.activeSelect.current.value;
+        const role = this.roleSelect.current.value;
+        this.props.saveUser({ userName: this.state.userName, role, active });
     }
 
     onUserSaveClick() {
@@ -68,10 +69,6 @@ class User extends React.Component {
         return normalizedWord;
     }
 
-    findUser(userName) {
-        return this.props.users.find((item) => item.userName === userName);
-    }
-
     configPropValue(user, item) {
 
         let boolVal = '';
@@ -79,11 +76,13 @@ class User extends React.Component {
         else if (user[item] === false) boolVal = 'No';
 
         if (item === 'active') {
+
+
             return (
                 <select
                     ref={this.activeSelect}
                 >
-                    <option value={boolVal}>
+                    <option value={boolVal} selected="selected">
                         {boolVal}
                     </option>
                     <option value={boolVal === 'Yes' ? 'No' : 'Yes'}>
@@ -93,12 +92,12 @@ class User extends React.Component {
             );
         } else if (item === 'role') {
 
-            const roles = ['admin', 'executive', 'user'];
+            const staticRoles = [roles.ADMIN, roles.EXECUTIVE, roles.USER];
             const role = user[item];
 
             const configedRoles = [role];
 
-            roles.forEach((roleItem, index) => {
+            staticRoles.forEach((roleItem, index) => {
                 if (roleItem !== role) {
                     configedRoles.push(roleItem);
                 }
@@ -115,15 +114,17 @@ class User extends React.Component {
                     }
                 </select>
             );
+        } else {
+            return <span id="user__prop-value">{boolVal ? boolVal : user[item]}</span>;
         }
 
-        return <span id="user__prop-value">{boolVal ? boolVal : user[item]}</span>;
     }
 
     displayUser(user) {
         if (!user) {
             return null;
         }
+        console.log(user);
 
         const userProps = Object.getOwnPropertyNames(user);
 
@@ -154,7 +155,7 @@ class User extends React.Component {
 
                 <div className="user__save">
                     <button
-                        onClick={}
+                        onClick={this.onUserSaveClick}
                     >
                         Save User
                     </button>
@@ -181,10 +182,9 @@ class User extends React.Component {
             );
         }
 
-        const user = this.findUser(this.state.userName);
         const configuration = {
             title: 'Are you sure you want to save this user.',
-            callback: () => {}
+            callback: this.onUserSave
         }
 
         return (
@@ -193,13 +193,13 @@ class User extends React.Component {
                     configuration={configuration}
                 />
                 <AuthBar />
-                {this.displayUser(user)}
+                {this.displayUser(this.props.wantedUser)}
             </>
         );
     }
 
     componentDidMount() {
-
+        this.props.getUser(this.state.userName);
         this.props.checkAuthStatus();
     }
 
@@ -218,26 +218,68 @@ function mapStateToProps(state) {
     return {
         isLoggedIn: state.auth.isLoggedIn,
         user: state.auth.user,
-        users: state.auth.users
+        users: state.auth.users,
+        wantedUser: state.auth.wantedUser,
+        authInfo: state.auth.authInfo
     }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        saveUser: async () => {
+        saveUser: async ({ userName, role, active }) => {
             try {
                 dispatch(actions.loading(true));
+
+                const userResponse = await votifyServer.post('/save-user', { userName, role, active });
+
+                if (!userResponse.data.success) {
+                    dispatch(actions.loading(false));
+                    return dispatch(actions.authInfo({ authInfo: 'Something went wrong while saving user' }));
+                }
+
+                dispatch(actions.getUser(userResponse.data.wantedUser));
+                dispatch(actions.authInfo({ authInfo: userResponse.data.msg }));
+
+                dispatch(actions.warningPopUp(false));
+
+                window.location.reload();
+
             } catch (error) {
+                dispatch(actions.warningPopUp(false));
                 dispatch(actions.authInfo({ authInfo: error.response.data.error }));
             }
             dispatch(actions.loading(false));
+
         },
         setWarningPopUp: (payload) => {
             try {
+                
                 dispatch(actions.warningPopUp(payload));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: error.message }));
             }
+        },
+        getUser: async (userName) => {
+            try {
+                dispatch(actions.loading(true));
+
+                const userResponse = await votifyServer.get(`/users/${userName}`);
+
+                if (!userResponse.data.success) {
+                    dispatch(actions.loading(false));
+                    dispatch(actions.warningPopUp(false));
+                    return dispatch(actions.authInfo({ authInfo: 'Something went wrong while getting user' }));
+                }
+
+                dispatch(actions.getUser(userResponse.data.wantedUser));
+                dispatch(actions.authInfo({ authInfo: userResponse.data.msg }));
+                dispatch(actions.warningPopUp(false));
+
+            } catch (error) {
+                console.log(error.message);
+                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
+            }
+            dispatch(actions.loading(false));
         },
         checkAuthStatus: checkAuthStatus(dispatch, ownProps)
     }

@@ -24,6 +24,14 @@ function getUsers(payload) {
     }
 }
 
+function getUser(payload) {
+    return {
+        type: types.GET_USER,
+        payload
+    }
+}
+
+
 function authInfo(payload) {
     return {
         type: types.AUTH_INFO,
@@ -59,15 +67,24 @@ function warningPopUp(payload) {
     }
 }
 
+function placeWarningPopUp(payload) {
+    return {
+        type: types.PLACE_WARNING_POPUP,
+        payload
+    }
+}
+
 const actions = {
     logIn,
     logOut,
     getUsers,
+    getUser,
     authInfo,
     loading,
     getVotes,
     getVote,
-    warningPopUp
+    warningPopUp,
+    placeWarningPopUp
 }
 
 export default actions;

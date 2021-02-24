@@ -14,6 +14,7 @@ const initialValue = {
         userName: ''
     },
     users: [],
+    wantedUser: {},
     isLoggedIn: false,
     loading: false,
     authInfo: null,
@@ -63,6 +64,12 @@ export default function authReducer(state = initialValue, action) {
                 ...state,
                 users: action.payload
             }
+
+        case types.GET_USER:
+            return {
+                ...state,
+                wantedUser: action.payload
+            }
             
         case types.AUTH_INFO:
             return { 
@@ -80,6 +87,12 @@ export default function authReducer(state = initialValue, action) {
             return {
                 ...state,
                 warningPopUp: action.payload
+            }
+        
+        case types.PLACE_WARNING_POPUP:
+            return {
+                ...state,
+                elementWarninPopUp: action.payload
             }
 
         default:

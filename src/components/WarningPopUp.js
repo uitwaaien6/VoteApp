@@ -12,7 +12,9 @@ import '../styles/components/WarningPopUp.css';
 class WarningPopUp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            previousWarninPopUp: false
+        };
 
         this.warningPopUp = React.createRef();
     }
@@ -62,6 +64,8 @@ class WarningPopUp extends React.Component {
                 this.warningPopUp.current.style.top = `${window.pageYOffset}px`;
             }
         });
+
+        
     }
 
     render() {
