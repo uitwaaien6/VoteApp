@@ -13,6 +13,7 @@ const initialValue = {
         email: '',
         userName: ''
     },
+    users: [],
     isLoggedIn: false,
     loading: false,
     authInfo: null,
@@ -56,6 +57,11 @@ export default function authReducer(state = initialValue, action) {
                  },
                 isLoggedIn: false,
                 authInfo: action.payload ? action.payload.authInfo : 'Successfully logged out'
+            }
+        case types.GET_USERS:
+            return {
+                ...state,
+                users: action.payload
             }
             
         case types.AUTH_INFO:

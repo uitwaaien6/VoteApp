@@ -71,6 +71,11 @@ class AuthBar extends React.Component {
                     role: 'admin'
                 },
                 {
+                    title: 'Users',
+                    uri: '/users',
+                    role: 'admin'
+                },
+                {
                     title: 'Register Voter',
                     uri: '/register-executive',
                     role: 'admin'

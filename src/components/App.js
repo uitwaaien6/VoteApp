@@ -13,6 +13,8 @@ import Register from '../screens/Register';
 import Profile from '../screens/Profile';
 import StartVote from '../screens/StartVote';
 import RegisterExecutive from '../screens/RegisterExecutive';
+import Users from '../screens/Users';
+import User from '../screens/User';
 
 // COMPONENTS
 import Header from './Header';
@@ -54,6 +56,8 @@ class App extends React.Component {
                                 <Route path="/votes/:voteId" exact component={Vote} />
                                 <Route path="/votes" exact component={Votes} />
                                 <Route path="/start-vote" exact component={StartVote} />
+                                <Route path="/users" exact component={Users} />
+                                <Route path="/users/:userName" exact component={User} />
                                 <Route path="/register-executive" exact component={RegisterExecutive} />
                             </Switch>
                             <Footer />

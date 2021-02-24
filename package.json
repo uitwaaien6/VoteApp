@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.2",
     "axios": "^0.21.1",
     "email-validator": "^2.0.4",
+    "m512-countdown": "^1.0.0",
     "password-validator": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

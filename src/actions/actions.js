@@ -17,6 +17,13 @@ function logOut(payload) {
     }
 }
 
+function getUsers(payload) {
+    return {
+        type: types.GET_USERS,
+        payload
+    }
+}
+
 function authInfo(payload) {
     return {
         type: types.AUTH_INFO,
@@ -55,6 +62,7 @@ function warningPopUp(payload) {
 const actions = {
     logIn,
     logOut,
+    getUsers,
     authInfo,
     loading,
     getVotes,

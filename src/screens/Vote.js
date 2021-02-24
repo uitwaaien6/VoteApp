@@ -52,7 +52,6 @@ class Vote extends React.Component {
         }
 
         const votesProps = Object.getOwnPropertyNames(vote.votes);
-        console.log(vote);
 
         return votesProps.map((voteProp, index) => {
             return (

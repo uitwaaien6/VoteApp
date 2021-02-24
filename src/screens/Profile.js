@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 // COMPONENTS
 import AuthBar from '../components/AuthBar';
 
@@ -131,6 +132,7 @@ class Profile extends React.Component {
     };
 
     componentDidMount() {
+
         this.props.checkAuthStatus();
     }
 

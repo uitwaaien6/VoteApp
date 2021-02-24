@@ -1,0 +1,93 @@
+.user__content {
+    padding: 3rem 0rem 15rem 0rem;
+    background-color: rgb(180, 92, 33);
+}
+
+.user__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0rem;
+    text-align: center;
+}
+
+.user__info > p {
+    font-size: 1.2rem;
+    color: yellow;
+    padding: 0.6rem 2rem;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.user__unauthorized {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6rem;  
+    width: 100%;
+}
+
+.user__unauthorized > iframe {
+    width: 384px;
+    height: 283px;
+}
+
+.user__unauthorized > p {
+    font-size: 2rem;
+    color: white;
+    padding-top: 4rem;
+}
+
+.user__props {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0rem;
+}
+
+.user__props > h1{
+    color: white;
+    padding: 1rem 0rem;
+}
+
+.user__display-props {
+    color: white;
+    padding: 0.2rem 0rem;
+    font-size: 1.2rem;
+}
+
+.user__auth-button {
+    margin-left: 1.5rem;
+}
+
+.user__save {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.user__save button {
+    width: 15rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.user__save button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+
+}
+
+#user__prop-value {
+    color: yellow;
+}
