@@ -10,6 +10,7 @@ const GET_VOTES = 'GET_VOTES';
 const GET_VOTE = 'GET_VOTE';
 
 const WARNING_POPUP = 'WARNING_POPUP';
+const PLACE_WARNING_POPUP = 'PLACE_WARNING_POPUP';
 
 const types = {
     LOG_IN,
@@ -20,7 +21,8 @@ const types = {
     LOADING,
     GET_VOTES,
     GET_VOTE,
-    WARNING_POPUP
+    WARNING_POPUP,
+    PLACE_WARNING_POPUP
 }
 
 export default types;

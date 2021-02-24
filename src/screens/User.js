@@ -2,7 +2,6 @@
 // NODE MODULES
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 // COMPONENTS
 import AuthBar from '../components/AuthBar';
@@ -34,6 +33,7 @@ class User extends React.Component {
         
         this.activeSelect = React.createRef();
         this.roleSelect = React.createRef();
+        this.elementWarningPopUp = React.createRef();
 
         this.onUserSaveClick = this.onUserSaveClick.bind(this);
         this.onUserSave = this.onUserSave.bind(this);
@@ -46,7 +46,7 @@ class User extends React.Component {
     }
 
     onUserSaveClick() {
-        this.props.setWarningPopUp(true);
+        this.props.setWarningPopUp(true, this.elementWarningPopUp.current);
     }
 
         // normalizes the camelCase words and make first letter upper
@@ -82,7 +82,7 @@ class User extends React.Component {
                 <select
                     ref={this.activeSelect}
                 >
-                    <option value={boolVal} selected="selected">
+                    <option value={boolVal}>
                         {boolVal}
                     </option>
                     <option value={boolVal === 'Yes' ? 'No' : 'Yes'}>
@@ -124,7 +124,6 @@ class User extends React.Component {
         if (!user) {
             return null;
         }
-        console.log(user);
 
         const userProps = Object.getOwnPropertyNames(user);
 
@@ -190,6 +189,7 @@ class User extends React.Component {
         return (
             <>
                 <WarningPopUp
+                    ref={this.elementWarningPopUp}
                     configuration={configuration}
                 />
                 <AuthBar />
@@ -251,9 +251,10 @@ function mapDispatchToProps(dispatch, ownProps) {
             dispatch(actions.loading(false));
 
         },
-        setWarningPopUp: (payload) => {
+        setWarningPopUp: (payload, elementWarningPopUp) => {
             try {
-                
+                console.log(elementWarningPopUp);
+                dispatch(actions.placeWarningPopUp(elementWarningPopUp));
                 dispatch(actions.warningPopUp(payload));
             } catch (error) {
                 dispatch(actions.authInfo({ authInfo: error.message }));
@@ -286,4 +287,3 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);
-
