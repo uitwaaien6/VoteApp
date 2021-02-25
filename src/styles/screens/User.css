@@ -60,6 +60,21 @@
     font-size: 1.2rem;
 }
 
+.user__display-props select {
+    border: none;
+    padding: 0.3rem 0.7rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    color: white;
+    cursor:pointer;
+    transition: all 0.2s ease-out;
+}
+
+.user__display-props select:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .user__auth-button {
     margin-left: 1.5rem;
 }

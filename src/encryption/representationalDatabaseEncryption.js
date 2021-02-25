@@ -258,4 +258,4 @@ class RDE {
     }
 }
 
-module.exports = RDE;
+export default RDE;
