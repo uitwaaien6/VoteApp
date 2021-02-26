@@ -83,7 +83,9 @@ class Header extends React.Component {
     renderHeaderElements(isLoggedIn) {
         return (
             <div className="header__default">
-                <h1>Votify</h1>
+                <Link to="/">
+                    <h1>Votify</h1>
+                </Link>
 
                 {this.renderAuthElements(isLoggedIn)}
 
