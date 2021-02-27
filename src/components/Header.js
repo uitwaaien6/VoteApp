@@ -52,7 +52,7 @@ class Header extends React.Component {
 
                     <li onClick={this.onLogOut}>
                         <Route
-                            render={({ history }) => <Link onClick={() => history.push('/login')}>Log out</Link>}
+                            render={({ history }) => <Link to="/login" onClick={() => history.push('/login')}>Log out</Link>}
                         />
                     </li>
                 </ul>

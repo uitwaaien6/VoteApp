@@ -281,8 +281,13 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.loading(false));
 
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
-                dispatch(actions.loading(false));
+                console.log(error);
+                if (error.response) {
+                    dispatch(actions.authInfo({ authInfo: error.response.data.error }));
+                } else {
+                    dispatch(actions.authInfo({ authInfo: 'Something went wrong while logging in' }));
+                }
+
             }
 
             dispatch(actions.loading(false));
@@ -302,8 +307,12 @@ function mapDispatchToProps(dispatch, ownProps) {
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
-                dispatch(actions.loading(false));
+                console.log(error);
+                if (error.response) {
+                    dispatch(actions.authInfo({ authInfo: error.response.data.error }));
+                } else {
+                    dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+                }
             }
 
             dispatch(actions.loading(false));
@@ -324,8 +333,12 @@ function mapDispatchToProps(dispatch, ownProps) {
                 }
                 dispatch(actions.loading(false));
             } catch (error) {
-                dispatch(actions.authInfo({ authInfo: error.response.data.error }));
-                dispatch(actions.loading(false));
+                console.log(error);
+                if (error.response) {
+                    dispatch(actions.authInfo({ authInfo: error.response.data.error }));
+                } else {
+                    dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
+                }
             }
 
             dispatch(actions.loading(false));

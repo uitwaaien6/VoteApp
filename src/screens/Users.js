@@ -127,8 +127,8 @@ function mapDispatchToProps(dispatch, ownProps) {
                 dispatch(actions.authInfo({ authInfo: usersResponse.data.success }));
 
             } catch (error) {
-
-                if (error.response.data) {
+                dispatch(actions.loading(false));
+                if (error.response) {
                     return dispatch(actions.authInfo({ authInfo: error.response.data.error }));
                 }
                 dispatch(actions.authInfo({ authInfo: 'Something went wrong' }));
