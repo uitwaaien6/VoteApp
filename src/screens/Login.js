@@ -27,11 +27,9 @@ class Login extends React.Component {
         }
 
         return (
-            <>
-                <AuthForm  
-                    history={this.props.history} // we pass the history object which comes from the router component
-                />
-            </>
+            <AuthForm  
+                history={this.props.history} // we pass the history object which comes from the router component
+            />
         );
     }
 

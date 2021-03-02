@@ -242,7 +242,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
                 dispatch(actions.warningPopUp(false));
 
-                window.location.reload();
+                //window.location.reload();
 
             } catch (error) {
                 dispatch(actions.warningPopUp(false));
