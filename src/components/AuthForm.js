@@ -3,12 +3,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ROE from 'ro-encrypt';
 
 // ACTIONS
 import actions from '../actions/actions';
-
-// ENCRYPTION
-import RDE from '../encryption/representationalDatabaseEncryption';
 
 // API
 import votifyServer from '../api/votifyServer';
@@ -264,9 +262,9 @@ function mapDispatchToProps(dispatch, ownProps) {
                     dispatch(actions.authInfo({ authInfo: 'Please fill all the credentials' }));
                 }
 
-                const rdeKey = RDE.createKey(password);
+                const rdeKey = ROE.createKey(password);
 
-                const encryptedPassword = RDE.encrypt(password, rdeKey);
+                const encryptedPassword = ROE.encrypt(password, rdeKey);
 
                 const response = await votifyServer.post('/login', { email, encryptedPassword, rdeKey });
                 const { data } = response;
