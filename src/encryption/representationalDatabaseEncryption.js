@@ -234,12 +234,14 @@ class RDE {
     
                         for (let k = 0; k < sectionProperties.length; k++) {
                             
-                            keyObject[keyObjectProperties[j]][sectionProperties[k]].find((item, index) => {
+                            keyObject[keyObjectProperties[j]][sectionProperties[k]].forEach((item, index) => {
     
                                 if (extractedEncryption === item) {
         
                                     decryptedPassword += keyObjectProperties[j];
+
                                 }
+                                
                             });
                         }
                     }
