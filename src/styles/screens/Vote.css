@@ -14,6 +14,10 @@
     transition: all 0.2s ease-in-out;
 }
 
+.vote__info p {
+    padding: 0rem 2rem;
+}
+
 .vote__unauthorized {
     display: flex;
     flex-direction: column;
@@ -45,7 +49,7 @@
 .vote__vote h1 {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 0.5rem;
-    padding: 1rem 2rem;
+    padding: 1rem 4rem;
     margin: 2rem 0rem;
     color: white;
 }
@@ -79,7 +83,7 @@
     }
     
     .vote__vote h1 {
-        padding: 1rem 1rem;
+        padding: 1rem 3rem;
     }
     
 }

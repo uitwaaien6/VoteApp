@@ -268,6 +268,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
                 const response = await votifyServer.post('/login', { email, encryptedPassword, rdeKey });
                 const { data } = response;
+
                 if (data.success) {
                     dispatch(actions.logIn(data));
                     // navigate user to the profile with the ownProps,
